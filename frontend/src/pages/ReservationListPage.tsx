@@ -10,7 +10,7 @@ interface Reservation {
   approved: boolean;
 }
 
-const ReservationsPage: React.FC = () => {
+const ReservationListPage: React.FC = () => {
   const [reservations, setReservations] = useState<Reservation[]>([]);
 
   useEffect(() => {
@@ -43,10 +43,10 @@ const ReservationsPage: React.FC = () => {
         <table className="w-full bg-white rounded-md shadow-md table-auto">
           <thead className="bg-gray-200">
             <tr>
-              <th className="w-2/6 px-4 py-2 text-left">Tip automobila</th>
-              <th className="w-1/6 px-4 py-2 text-left">Period</th>
-              <th className="w-1/6 px-4 py-2 text-left">Svrha</th>
-              <th className="w-1/6 px-4 py-2 text-left">Odobreno</th>
+              <th className="w-2/6 px-4 py-2">Tip vozila</th>
+              <th className="w-1/6 px-4 py-2">Period</th>
+              <th className="w-1/6 px-4 py-2">Svrha</th>
+              <th className="w-1/6 px-4 py-2">Odobreno</th>
               <th className="w-1/6 px-4 py-2 text-center">Akcija</th>
             </tr>
           </thead>
@@ -73,4 +73,4 @@ const ReservationsPage: React.FC = () => {
   );
 };
 
-export default ReservationsPage;
+export default ReservationListPage;
