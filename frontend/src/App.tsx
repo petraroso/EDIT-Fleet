@@ -6,6 +6,7 @@ import CarReservationPage from "./pages/CarReservationPage";
 import ReportPage from "./pages/ReportPage";
 import ReservationListPage from "./pages/ReservationListPage";
 import RequestListPage from "./pages/RequestListPage";
+import VehicleListPage from "./pages/VehicleListPage";
 import Header from "./components/Header";
 import NavigationHeader from "./components/NavigationHeader";
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/report" element={<ReportPage />} />
         <Route path="/reservations" element={<ReservationListPage />} />
         <Route path="/requests" element={<RequestListPage />} />
+        <Route path="/vehicles" element={<VehicleListPage />} />
       </Routes>
     </BrowserRouter>
   );
