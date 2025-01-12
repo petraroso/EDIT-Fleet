@@ -8,7 +8,6 @@ const ReportPage: React.FC = () => {
   const [description, setDescription] = useState("");
   const [vehicle, setVehicle] = useState("");
 
-  // Handle the issue report submit
   const handleReport = async (e: React.FormEvent) => {
     e.preventDefault();
 

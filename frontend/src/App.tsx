@@ -4,7 +4,7 @@ import React from "react";
 import LoginPage from "./pages/LoginPage";
 import CarReservationPage from "./pages/CarReservationPage";
 import ReportPage from "./pages/ReportPage";
-import HomePage from "./pages/HomePage";
+import ReservationsPage from "./pages/ReservationPage";
 import Header from "./components/Header";
 import NavigationHeader from "./components/NavigationHeader";
 
@@ -15,10 +15,10 @@ function App() {
 
       <NavigationHeader />
       <Routes>
-        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/reserve" element={<CarReservationPage />} />
         <Route path="/report" element={<ReportPage />} />
+        <Route path="/reservations" element={<ReservationsPage />} />
       </Routes>
     </BrowserRouter>
   );
