@@ -4,7 +4,7 @@ import React from "react";
 import LoginPage from "./pages/LoginPage";
 import CarReservationPage from "./pages/CarReservationPage";
 import ReportPage from "./pages/ReportPage";
-import ReservationsPage from "./pages/ReservationPage";
+import ReservationsPage from "./pages/ReservationListPage";
 import Header from "./components/Header";
 import NavigationHeader from "./components/NavigationHeader";
 

@@ -42,6 +42,42 @@ const NavigationHeader: React.FC = () => {
             Prijava problema
           </NavLink>
         </li>
+        <li>
+          <NavLink
+            to="/requests"
+            className={({ isActive }) =>
+              isActive
+                ? "px-4 py-2 border-b-2 border-white"
+                : "px-4 py-2 hover:bg-gray-500"
+            }
+          >
+            Zahtjevi
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/vehicles"
+            className={({ isActive }) =>
+              isActive
+                ? "px-4 py-2 border-b-2 border-white"
+                : "px-4 py-2 hover:bg-gray-500"
+            }
+          >
+            Vozila
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/reports"
+            className={({ isActive }) =>
+              isActive
+                ? "px-4 py-2 border-b-2 border-white"
+                : "px-4 py-2 hover:bg-gray-500"
+            }
+          >
+            Prijavljeni problemi
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );
