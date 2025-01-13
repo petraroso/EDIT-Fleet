@@ -18,7 +18,7 @@ function App() {
 
       <NavigationHeader />
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<LoginPage />} />
         <Route path="/reserve" element={<CarReservationPage />} />
         <Route path="/report" element={<ReportPage />} />
         <Route path="/reservations" element={<ReservationListPage />} />

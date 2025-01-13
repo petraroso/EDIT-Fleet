@@ -19,7 +19,7 @@ const Header: React.FC<HeaderProps> = ({ currentUser, onLogout }) => {
           <>
             <span className="font-semibold">{currentUser}</span>
             <NavLink
-              to="/login"
+              to="/"
               className={({ isActive }) =>
                 isActive
                   ? "px-4 py-2 border-b-2 border-white"
