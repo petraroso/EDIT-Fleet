@@ -3,6 +3,7 @@ import axios from "axios";
 import ReportListTable from "../components/ReportListTable";
 import { Report } from "../data/models";
 
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const ReportListPage: React.FC = () => {
   const [reports, setReports] = useState<Report[]>([]);

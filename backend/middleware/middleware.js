@@ -1,7 +1,14 @@
 import jwt from "jsonwebtoken";
+import { User } from "../models/models.js";
+
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const JWT_TOKEN_SECRET = process.env.JWT_TOKEN_SECRET;
 
 //middleware za verifikaciju jwt tokena
-const verifyToken = (JWT_TOKEN_SECRET) =>(req, res,  next) => {
+const verifyToken = (JWT_TOKEN_SECRET) => (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (!authHeader)
     return res.status(403).send("Ne postoji autorizacijsko zaglavlje");
@@ -43,7 +50,6 @@ const verifyRole = (role) => (req, res, next) => {
   return res.status(403).send(`Zabranjen pristup za ulogu: ${req.user.role}`);
 };
 
-
 function validateEmail(req, res, next) {
   const email = req.body.email;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -55,5 +61,20 @@ function validateEmail(req, res, next) {
   next();
 }
 
+const fetchUser = async (req, res, next) => {
+  try {
+    const token = req.headers.authorization?.split(" ")[1];
+    if (!token) return res.status(401).send("Token nije pronađen");
 
-export { verifyToken, verifyCookie, verifyRole, validateEmail };
+    const decoded = jwt.verify(token, JWT_TOKEN_SECRET);
+    const user = await User.findById(decoded._id);
+    if (!user) return res.status(404).send("Korisnik nije pronađen");
+
+    req.user = user;
+    next();
+  } catch (error) {
+    res.status(401).send("Neispravan token");
+  }
+};
+
+export { verifyToken, verifyCookie, verifyRole, validateEmail, fetchUser };

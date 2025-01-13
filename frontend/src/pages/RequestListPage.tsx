@@ -3,6 +3,7 @@ import axios from "axios";
 import TableRow from "../components/TableRow";
 import { Reservation } from "../data/models";
 
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const RequestListPage: React.FC = () => {
   const [reservations, setReservations] = useState<Reservation[]>([]);

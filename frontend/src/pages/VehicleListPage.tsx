@@ -3,6 +3,8 @@ import axios from "axios";
 import VehicleListTable from "../components/VehicleListTable";
 import { Vehicle } from "../data/models";
 
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+
 const VehicleListPage: React.FC = () => {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
 

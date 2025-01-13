@@ -12,11 +12,9 @@ export const registerUser = async (req, res) => {
   try {
     const hashLozinka = await bcrypt.hash(req.body.password, saltRunde);
     const noviKorisnik = new User({ ...req.body, password: hashLozinka });
-    const token = jwt.sign(
-      { idKorisnika: noviKorisnik.username },
-      JWT_TOKEN_SECRET,
-      { expiresIn: "1h" }
-    );
+    const token = jwt.sign({ _id: noviKorisnik._id }, JWT_TOKEN_SECRET, {
+      expiresIn: "1h",
+    });
 
     res.cookie("accessToken", token, {
       httpOnly: true,
@@ -46,11 +44,9 @@ export const loginUser = async (req, res) => {
       korisnikBaza &&
       (await bcrypt.compare(req.body.password, korisnikBaza.password))
     ) {
-      const token = jwt.sign(
-        { idKorisnika: korisnikBaza.username },
-        JWT_TOKEN_SECRET,
-        { expiresIn: "1h" }
-      );
+      const token = jwt.sign({ _id: korisnikBaza._id }, JWT_TOKEN_SECRET, {
+        expiresIn: "1h",
+      });
 
       res.cookie("accessToken", token, {
         httpOnly: true,

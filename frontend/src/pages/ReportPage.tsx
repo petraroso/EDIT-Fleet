@@ -3,6 +3,8 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import axios from "axios";
 
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+
 const ReportPage: React.FC = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");

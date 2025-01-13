@@ -7,6 +7,8 @@ import { User } from "../data/models";
 import axios from "axios";
 import Cookies from "js-cookie";
 
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+
 const LoginPage: React.FC = () => {
   const [isRegistering, setIsRegistering] = useState(true);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -14,7 +16,7 @@ const LoginPage: React.FC = () => {
   const handleLogin = (email: string, password: string) => {
     axios
       .post(
-        "http://localhost:5000/login",
+        `${BASE_URL}/api/login`,
         { email, password },
         { withCredentials: true }
       )
@@ -43,7 +45,7 @@ const LoginPage: React.FC = () => {
   ) => {
     axios
       .post(
-        "http://localhost:5000/register",
+        `${BASE_URL}/api/register`,
         { username, email, password, role },
         { withCredentials: true }
       )
@@ -60,7 +62,7 @@ const LoginPage: React.FC = () => {
     const route = role === "Admin" ? "/roleAdmin" : "/roleUser";
 
     axios
-      .get(`http://localhost:5000${route}`, {
+      .get(`${BASE_URL}/api${route}`, {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
