@@ -3,10 +3,25 @@ import { Schema } from "mongoose";
 
 const userShema = new Schema({
   username: { type: String, unique: true, required: true },
-  email: { type: String, unique: true, required: true },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    validate: {
+      validator: function (value) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(value);
+      },
+      message: (props) => `${props.value} nije ispravna e-mail adresa!`,
+    },
+  },
   password: { type: String, required: true },
   role: { type: String, required: true, default: "User" },
-  reservations: { type: [Schema.Types.ObjectId],  ref: "Reservation", default: [] },
+  reservations: {
+    type: [Schema.Types.ObjectId],
+    ref: "Reservation",
+    default: [],
+  },
   //createdAt: { type: Date, default: Date.now },
 });
 const User = mongoose.model("User", userShema);
@@ -28,11 +43,12 @@ const vehicleShema = new Schema({
 });
 const Vehicle = mongoose.model("Vehicle", vehicleShema);
 
-const problemShema = new Schema({
+const reportShema = new Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
   vehicle: { type: Schema.Types.ObjectId, ref: "Vehicle" },
+  user: { type: Schema.Types.ObjectId, ref: "User", required: true },
 });
-const Problem = mongoose.model("Problem", problemShema);
+const Report = mongoose.model("Report", reportShema);
 
-export { User, Reservation, Vehicle, Problem };
+export { User, Reservation, Vehicle, Report };
