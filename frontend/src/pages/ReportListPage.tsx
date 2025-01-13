@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ReportListTable from "../components/ReportListTable";
+import { Report } from "../data/models";
 
-interface Report {
-  _id: string;
-  title: string;
-  description: string;
-  vehicle: string;
-  user: string;
-}
 
 const ReportListPage: React.FC = () => {
   const [reports, setReports] = useState<Report[]>([]);

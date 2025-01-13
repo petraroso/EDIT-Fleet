@@ -1,10 +1,5 @@
 import React from "react";
-
-interface User {
-  username: string;
-  email: string;
-  role: "User" | "Admin";
-}
+import { User } from "../data/models";
 
 interface UserDisplayProps {
   user: User | null;

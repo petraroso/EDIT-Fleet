@@ -1,10 +1,5 @@
 import React from "react";
-
-interface Vehicle {
-  _id: string;
-  name: string;
-  type: string;
-}
+import { Vehicle } from "../data/models";
 
 interface VehicleListTableProps {
   title: string;

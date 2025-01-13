@@ -2,15 +2,10 @@ import React, { useState } from "react";
 import Form from "../components/Form";
 import Button from "../components/Button";
 import UserDisplay from "../components/UserDisplay";
+import { User } from "../data/models";
 
 import axios from "axios";
 import Cookies from "js-cookie";
-
-interface User {
-  username: string;
-  email: string;
-  role: "User" | "Admin";
-}
 
 const LoginPage: React.FC = () => {
   const [isRegistering, setIsRegistering] = useState(true);

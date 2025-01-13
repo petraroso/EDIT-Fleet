@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-
-interface Report {
-  _id: string;
-  title: string;
-  description: string;
-  vehicle: string;
-  user: string;
-}
+import { Report } from "../data/models";
 
 interface ReportRowProps {
   report: Report;

@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import TableRow from "../components/TableRow";
+import { Reservation } from "../data/models";
 
-interface Reservation {
-  _id: string;
-  vehicle_type: string;
-  period: string;
-  purpose: string;
-  approved: boolean;
-  user: string;
-}
 
 const RequestListPage: React.FC = () => {
   const [reservations, setReservations] = useState<Reservation[]>([]);

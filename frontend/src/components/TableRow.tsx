@@ -1,15 +1,7 @@
 import React from "react";
 import { FaTimes, FaCheck } from "react-icons/fa";
 import Button from "./Button";
-
-interface Reservation {
-  _id: string;
-  vehicle_type: string;
-  period: string;
-  purpose: string;
-  approved: boolean;
-  user?: string;
-}
+import { Reservation } from "../data/models";
 
 interface TableRowProps {
   reservation: Reservation;

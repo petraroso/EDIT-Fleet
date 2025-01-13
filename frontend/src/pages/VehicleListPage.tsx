@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import VehicleListTable from "../components/VehicleListTable";
-
-interface Vehicle {
-  _id: string;
-  name: string;
-  type: string;
-  available: boolean;
-}
+import { Vehicle } from "../data/models";
 
 const VehicleListPage: React.FC = () => {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
