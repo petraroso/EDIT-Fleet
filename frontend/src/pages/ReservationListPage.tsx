@@ -11,8 +11,12 @@ const ReservationListPage: React.FC = () => {
   useEffect(() => {
     const fetchReservations = async () => {
       try {
-        //const response = await axios.get("/api/reservations");
-        //setReservations(response.data);
+        const response = await axios.get(`${BASE_URL}/api/reservations`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        setReservations(response.data);
       } catch (error) {
         console.error("Error fetching reservations:", error);
       }
@@ -38,10 +42,10 @@ const ReservationListPage: React.FC = () => {
         <table className="w-full bg-white rounded-md shadow-md table-auto">
           <thead className="bg-gray-200">
             <tr>
-              <th className="w-1/5 px-4 py-2">Tip vozila</th>
-              <th className="w-1/5 px-4 py-2">Period</th>
-              <th className="w-1/5 px-4 py-2">Svrha</th>
-              <th className="w-1/5 px-4 py-2">Odobreno</th>
+              <th className="w-1/5 px-4 py-2 text-left">Tip vozila</th>
+              <th className="w-1/5 px-4 py-2 text-left">Period</th>
+              <th className="w-1/5 px-4 py-2 text-left">Svrha</th>
+              <th className="w-1/5 px-4 py-2 text-left">Odobreno</th>
               <th className="w-1/5 px-4 py-2 text-center">Akcija</th>
             </tr>
           </thead>
@@ -52,6 +56,7 @@ const ReservationListPage: React.FC = () => {
                   key={reservation._id}
                   reservation={reservation}
                   onCancel={handleCancel}
+                  admin={false}
                 />
               ))
             ) : (

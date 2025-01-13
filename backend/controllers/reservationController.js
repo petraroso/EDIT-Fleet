@@ -27,3 +27,28 @@ export const reserveCar = async (req, res) => {
     res.status(500).json({ error: "Dogodila se greška na serveru" });
   }
 };
+
+export const getReservations = async (req, res) => {
+  if (!req.user) {
+    return res.status(401).json({ error: "Neautoriziran zahtjev" });
+  }
+  try {
+    const reservations = await Reservation.find({
+      user: req.user._id,
+    }).populate("vehicle");
+    res.json(reservations);
+  } catch (error) {
+    console.error("Greška prilikom dohvaćanja rezervacija:", error);
+    res.status(500).json({ error: "Dogodila se greška na serveru" });
+  }
+};
+
+export const getAllReservations = async (req, res) => {
+  try {
+    const reservations = await Reservation.find({}).populate("vehicle", "user");
+    res.json(reservations);
+  } catch (error) {
+    console.error("Greška prilikom dohvaćanja rezervacija:", error);
+    res.status(500).json({ error: "Dogodila se greška na serveru" });
+  }
+};

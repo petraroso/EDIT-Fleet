@@ -22,8 +22,8 @@ export interface Reservation {
 }
 
 export interface Vehicle {
-    _id: string;
-    name: string;
-    type: string;
-    available: boolean;
-  }
+  _id: string;
+  name: string;
+  type: string;
+  available: boolean;
+}

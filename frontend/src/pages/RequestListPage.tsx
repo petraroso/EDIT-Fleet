@@ -37,7 +37,6 @@ const RequestListPage: React.FC = () => {
 
   const handleReject = async (reservationId: string) => {
     try {
-
       //await axios.delete(`/api/reservations/${reservationId}`);
       //setReservations((prevReservations) =>
       //  prevReservations.filter((res) => res._id !== reservationId)
@@ -73,9 +72,10 @@ const RequestListPage: React.FC = () => {
                 <TableRow
                   key={reservation._id}
                   reservation={reservation}
-                  onApprove={handleApprove} 
+                  onApprove={handleApprove}
                   onReject={handleReject}
                   isApprovalTable={true}
+                  admin={true}
                 />
               ))
             ) : (
@@ -108,9 +108,10 @@ const RequestListPage: React.FC = () => {
                 <TableRow
                   key={reservation._id}
                   reservation={reservation}
-                  onApprove={handleApprove} 
-                  onReject={handleReject} 
+                  onApprove={handleApprove}
+                  onReject={handleReject}
                   isApprovalTable={true}
+                  admin={true}
                 />
               ))
             ) : (

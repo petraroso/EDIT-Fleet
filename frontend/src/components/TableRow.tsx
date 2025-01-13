@@ -9,6 +9,7 @@ interface TableRowProps {
   onReject?: (reservationId: string) => void;
   onCancel?: (reservationId: string) => void;
   isApprovalTable?: boolean;
+  admin: boolean;
 }
 
 const TableRow: React.FC<TableRowProps> = ({
@@ -17,13 +18,20 @@ const TableRow: React.FC<TableRowProps> = ({
   onReject,
   onCancel,
   isApprovalTable,
+  admin,
 }) => {
   return (
     <tr>
       <td className="w-1/5 px-4 py-2">{reservation.vehicle_type}</td>
       <td className="w-1/5 px-4 py-2">{reservation.period}</td>
       <td className="w-1/5 px-4 py-2">{reservation.purpose}</td>
-      <td className="w-1/5 px-4 py-2">{reservation.user || "N/A"}</td>
+      <td className="w-1/5 px-4 py-2">
+        {admin
+          ? reservation.user || "N/A"
+          : reservation.approved
+          ? "Odobreno"
+          : "Neodobreno"}
+      </td>
       <td className="w-1/5 px-4 py-2 text-center">
         {isApprovalTable ? (
           <div className="flex justify-center gap-4">
