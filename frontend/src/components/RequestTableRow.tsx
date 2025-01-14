@@ -7,7 +7,6 @@ interface RequestTableRowProps {
   reservation: Reservation;
   onApprove?: (reservationId: string) => void;
   onReject?: (reservationId: string) => void;
-  onCancel?: (reservationId: string) => void;
   isApprovalTable?: boolean;
 }
 
@@ -15,7 +14,6 @@ const RequestTableRow: React.FC<RequestTableRowProps> = ({
   reservation,
   onApprove,
   onReject,
-  onCancel,
   isApprovalTable,
 }) => {
   return (
@@ -42,14 +40,13 @@ const RequestTableRow: React.FC<RequestTableRowProps> = ({
               <FaCheck size={20} />
             </button>
           </div>
-        ) : onCancel ? (
-          <Button
-            label="Otkaži"
-            onClick={() => onCancel(reservation._id)}
-            className="bg-red-500 hover:bg-red-600"
-          />
         ) : (
-          <span className="text-gray-500">Odobreno</span>
+          <button
+            onClick={() => onReject && onReject(reservation._id)}
+            className="text-red-500 hover:text-red-700"
+          >
+            <FaTimes size={20} />
+          </button>
         )}
       </td>
     </tr>

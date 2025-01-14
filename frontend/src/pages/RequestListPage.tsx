@@ -36,13 +36,22 @@ const RequestListPage: React.FC = () => {
   };
 
   const handleReject = async (reservationId: string) => {
+    const confirmCancel = window.confirm(
+      "Jeste li sigurni da želite odbiti ovu rezervaciju?"
+    );
+
+    if (!confirmCancel) {
+      return;
+    }
     try {
-      //await axios.delete(`/api/reservations/${reservationId}`);
-      //setReservations((prevReservations) =>
-      //  prevReservations.filter((res) => res._id !== reservationId)
-      //);
+      await axios.delete(`${BASE_URL}/api/reservations/${reservationId}`);
+      setReservations((prevReservations) =>
+        prevReservations.filter((res) => res._id !== reservationId)
+      );
+      alert("Rezervacija je uspješno odbijena.");
     } catch (error) {
       console.error("Error rejecting reservation:", error);
+      alert("Došlo je do greške prilikom odbijanja rezervacije.");
     }
   };
 
@@ -76,7 +85,6 @@ const RequestListPage: React.FC = () => {
                   onApprove={handleApprove}
                   onReject={handleReject}
                   isApprovalTable={true}
-                  
                 />
               ))
             ) : (
@@ -112,8 +120,7 @@ const RequestListPage: React.FC = () => {
                   reservation={reservation}
                   onApprove={handleApprove}
                   onReject={handleReject}
-                  isApprovalTable={true}
-                  
+                  isApprovalTable={false}
                 />
               ))
             ) : (
