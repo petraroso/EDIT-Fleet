@@ -77,6 +77,7 @@ const RequestListPage: React.FC = () => {
     reservationId: string,
     vehicleId: string
   ) => {
+    if(reservationId!==""&& vehicleId!==""){
     try {
       const updatedVehicle = vehicles.find(
         (vehicle) => vehicle._id === vehicleId
@@ -98,7 +99,7 @@ const RequestListPage: React.FC = () => {
     } catch (error) {
       console.error("Error approving reservation:", error);
       alert("Došlo je do greške prilikom dodjeljivanja vozila rezervaciji.");
-    }
+    }}
   };
 
   const unapprovedReservations = reservations.filter((res) => !res.approved);
