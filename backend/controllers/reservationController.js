@@ -9,7 +9,8 @@ export const reserveCar = async (req, res) => {
 
   const newReservation = new Reservation({
     vehicle_type: reservation.vehicleType,
-    period: reservation.period,
+    startDate: reservation.startDate,
+    endDate: reservation.endDate,
     purpose: reservation.purpose,
     approved: false,
     vehicle: null,

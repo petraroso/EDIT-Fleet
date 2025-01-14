@@ -23,7 +23,10 @@ const TableRow: React.FC<TableRowProps> = ({
   return (
     <tr>
       <td className="w-1/5 px-4 py-2">{reservation.vehicle_type}</td>
-      <td className="w-1/5 px-4 py-2">{reservation.period}</td>
+      <td className="w-1/5 px-4 py-2">
+        {reservation.startDate.toString().substring(0, 10)}&nbsp;-&nbsp;
+        {reservation.endDate.toString().substring(0, 10)}
+      </td>
       <td className="w-1/5 px-4 py-2">{reservation.purpose}</td>
       <td className="w-1/5 px-4 py-2">
         {admin

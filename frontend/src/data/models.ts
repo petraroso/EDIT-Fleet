@@ -16,7 +16,8 @@ export interface Report {
 export interface Reservation {
   _id: string;
   vehicle_type: string;
-  period: string;
+  startDate: Date;
+  endDate: Date;
   purpose: string;
   approved: boolean;
   vehicle: string;

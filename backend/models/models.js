@@ -28,7 +28,8 @@ const User = mongoose.model("User", userShema);
 
 const reservationShema = new Schema({
   vehicle_type: { type: String, required: true },
-  period: { type: String, required: true },
+  startDate: { type: Date, required: true },
+  endDate: { type: Date, required: true },
   purpose: { type: String, required: true },
   approved: { type: Boolean, default: false },
   vehicle: { type: Schema.Types.ObjectId, ref: "Vehicle" },

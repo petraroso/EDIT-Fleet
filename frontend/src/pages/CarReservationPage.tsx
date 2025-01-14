@@ -7,13 +7,14 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const CarReservationPage: React.FC = () => {
   const [vehicleType, setVehicleType] = useState("");
-  const [period, setPeriod] = useState("");
+  const [startDate, setStartDate] = useState(""); 
+  const [endDate, setEndDate] = useState("");
   const [purpose, setPurpose] = useState("");
 
   // Handle the reservation submit
   const handleReservation = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (vehicleType !== "" && period !== "" && purpose !== "") {
+    if (vehicleType !== "" && startDate !== "" && endDate !== "" && purpose !== "") {
       const token = localStorage.getItem("token");
       if (!token) {
         alert("Niste prijavljeni. Molimo prijavite se prije rezervacije.");
@@ -23,7 +24,8 @@ const CarReservationPage: React.FC = () => {
       // Podaci za rezervaciju
       const reservationData = {
         vehicleType,
-        period,
+        startDate,
+        endDate,
         purpose,
       };
 
@@ -39,7 +41,8 @@ const CarReservationPage: React.FC = () => {
         );
         alert("Rezervacija uspješna!");
         setVehicleType("");
-        setPeriod("");
+        setStartDate("");
+        setEndDate("");
         setPurpose("");
       } catch (error: any) {
         console.error("There was an error with the reservation:", error);
@@ -60,11 +63,26 @@ const CarReservationPage: React.FC = () => {
           value={vehicleType}
           onChange={(e) => setVehicleType(e.target.value)}
         />
-        <Input
-          label="Vremenski period"
-          value={period}
-          onChange={(e) => setPeriod(e.target.value)}
-        />
+        <div className="mb-4">
+          <label className="block mb-2 font-semibold">Početni datum:</label>
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            className="w-full p-2 border rounded"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block mb-2 font-semibold">Završni datum:</label>
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            className="w-full p-2 border rounded"
+          />
+        </div>
+
+          
         <Input
           label="Svrha"
           value={purpose}
