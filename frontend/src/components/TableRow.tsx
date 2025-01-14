@@ -27,7 +27,9 @@ const TableRow: React.FC<TableRowProps> = ({
       <td className="w-1/5 px-4 py-2">{reservation.purpose}</td>
       <td className="w-1/5 px-4 py-2">
         {admin
-          ? reservation.user || "/"
+          ? reservation.user
+            ? reservation.user.username
+            : "/"
           : reservation.approved
           ? "Odobreno"
           : "Neodobreno"}

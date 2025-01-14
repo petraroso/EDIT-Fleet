@@ -16,6 +16,7 @@ const RequestTableRow: React.FC<RequestTableRowProps> = ({
   onReject,
   isApprovalTable,
 }) => {
+  if (reservation.vehicle) console.log(reservation.vehicle.name);
   return (
     <tr>
       <td className="w-1/6 px-4 py-2">{reservation.vehicle_type}</td>
@@ -25,8 +26,12 @@ const RequestTableRow: React.FC<RequestTableRowProps> = ({
       </td>
       <td className="w-1/6 px-4 py-2">{reservation.purpose}</td>
 
-      <td className="w-1/6 px-4 py-2">{reservation.vehicle || "/"}</td>
-      <td className="w-1/6 px-4 py-2">{reservation.user || "/"}</td>
+      <td className="w-1/6 px-4 py-2">
+        {reservation.vehicle ? reservation.vehicle.name : "/"}
+      </td>
+      <td className="w-1/6 px-4 py-2">
+        {reservation.user ? reservation.user.username : "/"}
+      </td>
       <td className="w-1/6 px-4 py-2 text-center">
         {isApprovalTable ? (
           <div className="flex justify-center gap-4">

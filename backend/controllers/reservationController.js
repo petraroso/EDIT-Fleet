@@ -13,7 +13,10 @@ export const reserveCar = async (req, res) => {
     endDate: reservation.endDate,
     purpose: reservation.purpose,
     approved: false,
-    vehicle: null,
+    vehicle:
+      reservation.vehicleId && reservation.vehicleId !== ""
+        ? reservation.vehicleId
+        : null,
     user: req.user._id,
   });
 
@@ -46,7 +49,9 @@ export const getReservations = async (req, res) => {
 
 export const getAllReservations = async (req, res) => {
   try {
-    const reservations = await Reservation.find({}).populate("vehicle", "user");
+    const reservations = await Reservation.find({})
+      .populate("vehicle")
+      .populate("user");
     res.json(reservations);
   } catch (error) {
     console.error("Greška prilikom dohvaćanja rezervacija:", error);

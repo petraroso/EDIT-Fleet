@@ -10,7 +10,7 @@ export interface Report {
   title: string;
   description: string;
   vehicle: string;
-  user: string;
+  user: User;
 }
 
 export interface Reservation {
@@ -20,8 +20,8 @@ export interface Reservation {
   endDate: Date;
   purpose: string;
   approved: boolean;
-  vehicle: string;
-  user: string;
+  vehicle: Vehicle;
+  user: User;
 }
 
 export interface Vehicle {

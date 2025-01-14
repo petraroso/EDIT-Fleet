@@ -2,7 +2,7 @@ import { Report } from "../models/models.js";
 
 export const getAllReports = async (req, res) => {
   try {
-    const reports = await Report.find({});
+    const reports = await Report.find({}).populate("user");
     res.json(reports);
   } catch (error) {
     console.error("Greška prilikom dohvaćanja prijava:", error);

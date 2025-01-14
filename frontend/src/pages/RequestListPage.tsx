@@ -80,7 +80,7 @@ const RequestListPage: React.FC = () => {
           </thead>
           <tbody>
             {unapprovedReservations.length > 0 ? (
-              unapprovedReservations.map((reservation) => (
+              unapprovedReservations.map((reservation, index) => (
                 <RequestTableRow
                   key={reservation._id}
                   reservation={reservation}
