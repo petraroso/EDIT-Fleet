@@ -5,21 +5,18 @@ import { Reservation } from "../data/models";
 
 interface TableRowProps {
   reservation: Reservation;
-  onApprove?: (reservationId: string) => void;
-  onReject?: (reservationId: string) => void;
-  onCancel?: (reservationId: string) => void;
+  onCancel: (reservationId: string) => void;
   isApprovalTable?: boolean;
   admin: boolean;
 }
 
 const TableRow: React.FC<TableRowProps> = ({
   reservation,
-  onApprove,
-  onReject,
   onCancel,
   isApprovalTable,
   admin,
 }) => {
+  const today = new Date();
   return (
     <tr>
       <td className="w-1/5 px-4 py-2">{reservation.vehicle_type}</td>
@@ -36,29 +33,14 @@ const TableRow: React.FC<TableRowProps> = ({
           : "Neodobreno"}
       </td>
       <td className="w-1/5 px-4 py-2 text-center">
-        {isApprovalTable ? (
-          <div className="flex justify-center gap-4">
-            <button
-              onClick={() => onReject && onReject(reservation._id)}
-              className="text-red-500 hover:text-red-700"
-            >
-              <FaTimes size={20} />
-            </button>
-            <button
-              onClick={() => onApprove && onApprove(reservation._id)}
-              className="text-green-500 hover:text-green-700"
-            >
-              <FaCheck size={20} />
-            </button>
-          </div>
-        ) : onCancel ? (
+        {new Date(reservation.startDate) > today ? (
           <Button
             label="Otkaži"
             onClick={() => onCancel(reservation._id)}
             className="bg-red-500 hover:bg-red-600"
           />
         ) : (
-          <span className="text-gray-500">Odobreno</span>
+          <span className="text-gray-500">Ne može se otkazati</span>
         )}
       </td>
     </tr>
