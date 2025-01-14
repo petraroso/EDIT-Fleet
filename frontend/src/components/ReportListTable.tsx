@@ -7,6 +7,12 @@ interface ReportListTableProps {
 }
 
 const ReportListTable: React.FC<ReportListTableProps> = ({ reports }) => {
+  const [expandedRowId, setExpandedRowId] = useState<string | null>(null);
+
+  const handleExpand = (reportId: string) => {
+    setExpandedRowId((prevId) => (prevId === reportId ? null : reportId));
+  };
+
   return (
     <div className="w-full mb-8">
       <div className="overflow-x-auto">
@@ -21,7 +27,12 @@ const ReportListTable: React.FC<ReportListTableProps> = ({ reports }) => {
           <tbody>
             {reports.length > 0 ? (
               reports.map((report) => (
-                <ReportRow key={report._id} report={report} />
+                <ReportRow
+                  key={report._id}
+                  report={report}
+                  isExpanded={expandedRowId === report._id}
+                  onExpand={handleExpand}
+                />
               ))
             ) : (
               <tr>

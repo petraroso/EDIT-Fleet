@@ -9,7 +9,7 @@ export interface Report {
   _id: string;
   title: string;
   description: string;
-  vehicle: string;
+  vehicle: Vehicle;
   user: User;
 }
 

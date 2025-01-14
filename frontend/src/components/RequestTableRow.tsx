@@ -16,23 +16,26 @@ const RequestTableRow: React.FC<RequestTableRowProps> = ({
   onReject,
   isApprovalTable,
 }) => {
-  if (reservation.vehicle) console.log(reservation.vehicle.name);
   return (
     <tr>
-      <td className="w-1/6 px-4 py-2">{reservation.vehicle_type}</td>
-      <td className="w-1/6 px-4 py-2">
+      <td className="w-1/6 px-4 py-2 border-b border-gray-200">
+        {reservation.vehicle_type}
+      </td>
+      <td className="w-1/6 px-4 py-2 border-b border-gray-200">
         {reservation.startDate.toString().substring(0, 10)}&nbsp;-&nbsp;
         {reservation.endDate.toString().substring(0, 10)}
       </td>
-      <td className="w-1/6 px-4 py-2">{reservation.purpose}</td>
+      <td className="w-1/6 px-4 py-2 border-b border-gray-200">
+        {reservation.purpose}
+      </td>
 
-      <td className="w-1/6 px-4 py-2">
+      <td className="w-1/6 px-4 py-2 border-b border-gray-200">
         {reservation.vehicle ? reservation.vehicle.name : "/"}
       </td>
-      <td className="w-1/6 px-4 py-2">
+      <td className="w-1/6 px-4 py-2 border-b border-gray-200">
         {reservation.user ? reservation.user.username : "/"}
       </td>
-      <td className="w-1/6 px-4 py-2 text-center">
+      <td className="w-1/6 px-4 py-2 text-center border-b border-gray-200">
         {isApprovalTable ? (
           <div className="flex justify-center gap-4">
             <button

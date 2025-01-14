@@ -2,7 +2,7 @@ import { Report } from "../models/models.js";
 
 export const getAllReports = async (req, res) => {
   try {
-    const reports = await Report.find({}).populate("user");
+    const reports = await Report.find({}).populate("user").populate("vehicle");
     res.json(reports);
   } catch (error) {
     console.error("Greška prilikom dohvaćanja prijava:", error);
@@ -20,7 +20,7 @@ export const reportProblem = async (req, res) => {
   const newReport = new Report({
     title: report.title,
     description: report.description,
-    vehicle: report.vehicle,
+    vehicle: report.vehicleId,
     user: req.user._id,
   });
 

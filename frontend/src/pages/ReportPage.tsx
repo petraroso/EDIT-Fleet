@@ -1,19 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import axios from "axios";
+import { Vehicle } from "../data/models";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const ReportPage: React.FC = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [vehicle, setVehicle] = useState("");
+  const [vehicleId, setVehicleId] = useState("");
+  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+
+  useEffect(() => {
+    const fetchVehicles = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/api/vehicles`);
+        const availableVehicles = response.data.filter(
+          (vehicle: Vehicle) => vehicle.available
+        );
+        setVehicles(availableVehicles);
+      } catch (error) {
+        console.error("Error fetching vehicles:", error);
+      }
+    };
+    fetchVehicles();
+  }, []);
 
   const handleReport = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (title !== "" && description !== "" && vehicle !== "") {
+    if (title !== "" && description !== "" && vehicleId !== "") {
       const token = localStorage.getItem("token");
       if (!token) {
         alert("Niste prijavljeni. Molimo prijavite se prije prijave problema.");
@@ -24,7 +41,7 @@ const ReportPage: React.FC = () => {
       const reportData = {
         title,
         description,
-        vehicle,
+        vehicleId,
       };
 
       try {
@@ -40,7 +57,7 @@ const ReportPage: React.FC = () => {
         alert("Prijava problema uspješna!");
         setTitle("");
         setDescription("");
-        setVehicle("");
+        setVehicleId("");
       } catch (error) {
         console.error("There was an error with the report submission:", error);
         alert("Dogodila se greška prilikom prijave problema.");
@@ -66,11 +83,21 @@ const ReportPage: React.FC = () => {
           onChange={(e) => setDescription(e.target.value)}
           type="textarea"
         />
-        <Input
-          label="Vozilo"
-          value={vehicle}
-          onChange={(e) => setVehicle(e.target.value)}
-        />
+        <div className="mb-4">
+          <label className="block mb-2 font-semibold">Vozilo:</label>
+          <select
+            value={vehicleId}
+            onChange={(e) => setVehicleId(e.target.value)}
+            className="w-full p-2 border rounded"
+          >
+            <option value="">Odaberite vozilo</option>
+            {vehicles.map((vehicle) => (
+              <option key={vehicle._id} value={vehicle._id}>
+                {vehicle.name}
+              </option>
+            ))}
+          </select>
+        </div>
         <Button label="Prijavi" type="submit" className="w-full mt-4" />
       </form>
     </div>

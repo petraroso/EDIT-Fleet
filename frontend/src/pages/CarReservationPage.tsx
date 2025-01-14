@@ -2,32 +2,14 @@ import React, { useEffect, useState } from "react";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import axios from "axios";
-import { Vehicle } from "../data/models";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const CarReservationPage: React.FC = () => {
   const [vehicleType, setVehicleType] = useState("");
-  const [vehicleId, setVehicleId] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [purpose, setPurpose] = useState("");
-  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
-
-  useEffect(() => {
-    const fetchVehicles = async () => {
-      try {
-        const response = await axios.get(`${BASE_URL}/api/vehicles`);
-        const availableVehicles = response.data.filter(
-          (vehicle: Vehicle) => vehicle.available
-        );
-        setVehicles(availableVehicles);
-      } catch (error) {
-        console.error("Error fetching vehicles:", error);
-      }
-    };
-    fetchVehicles();
-  }, []);
 
   // Handle the reservation submit
   const handleReservation = async (e: React.FormEvent) => {
@@ -47,7 +29,6 @@ const CarReservationPage: React.FC = () => {
       // Podaci za rezervaciju
       const reservationData = {
         vehicleType,
-        vehicleId,
         startDate,
         endDate,
         purpose,
@@ -65,7 +46,6 @@ const CarReservationPage: React.FC = () => {
         );
         alert("Rezervacija uspješna!");
         setVehicleType("");
-        setVehicleId("");
         setStartDate("");
         setEndDate("");
         setPurpose("");
@@ -88,21 +68,6 @@ const CarReservationPage: React.FC = () => {
           value={vehicleType}
           onChange={(e) => setVehicleType(e.target.value)}
         />
-        <div className="mb-4">
-          <label className="block mb-2 font-semibold">Vozilo:</label>
-          <select
-            value={vehicleId}
-            onChange={(e) => setVehicleId(e.target.value)}
-            className="w-full p-2 border rounded"
-          >
-            <option value="">Odaberite vozilo</option>
-            {vehicles.map((vehicle) => (
-              <option key={vehicle._id} value={vehicle._id}>
-                {vehicle.name}
-              </option>
-            ))}
-          </select>
-        </div>
         <div className="mb-4">
           <label className="block mb-2 font-semibold">Početni datum:</label>
           <input
