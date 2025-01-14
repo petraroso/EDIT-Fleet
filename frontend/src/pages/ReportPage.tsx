@@ -37,9 +37,13 @@ const ReportPage: React.FC = () => {
             },
           }
         );
-        console.log(response.data);
+        alert("Prijava problema uspješna!");
+        setTitle("");
+        setDescription("");
+        setVehicle("");
       } catch (error) {
         console.error("There was an error with the report submission:", error);
+        alert("Dogodila se greška prilikom prijave problema.");
       }
     } else alert("Ispunite sva polja.");
   };

@@ -37,8 +37,10 @@ const CarReservationPage: React.FC = () => {
             },
           }
         );
-
         alert("Rezervacija uspješna!");
+        setVehicleType("");
+        setPeriod("");
+        setPurpose("");
       } catch (error: any) {
         console.error("There was an error with the reservation:", error);
         alert("Dogodila se greška prilikom rezervacije.");
