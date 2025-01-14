@@ -1,42 +1,46 @@
-import React, { useState } from "react";
+import React from "react";
+import { FaTimes, FaCheck } from "react-icons/fa";
 import { Report } from "../data/models";
 
 interface ReportRowProps {
   report: Report;
-  isExpanded: boolean;
-  onExpand: (reportId: string) => void;
+  onSolve?: (reportId: string) => void;
+  onDelete: (reportId: string) => void;
+  hasCheckIcon: boolean;
 }
 
 const ReportRow: React.FC<ReportRowProps> = ({
   report,
-  isExpanded,
-  onExpand,
+  onSolve,
+  onDelete,
+  hasCheckIcon,
 }) => {
   return (
-    <>
-      <tr
-        className={`cursor-pointer transition-colors 
-          ${isExpanded ? "bg-blue-100" : "bg-white "} 
-          hover:bg-blue-50 `}
-        onClick={() => onExpand(report._id)}
-      >
-        <td className="px-4 py-2 border-b border-gray-200">{report.title}</td>
-        <td className="px-4 py-2 border-b border-gray-200">
-          {report.vehicle ? report.vehicle.name : "/"}
-        </td>
-        <td className="px-4 py-2 border-b border-gray-200">
-          {report.user ? report.user.username : "/"}
-        </td>
-      </tr>
-      {isExpanded && (
-        <tr className="bg-blue-50">
-          <td colSpan={3} className="px-4 py-4 border-b border-gray-300">
-            <strong>Opis problema:</strong>
-            <p className="mt-2">{report.description}</p>
-          </td>
-        </tr>
-      )}
-    </>
+    <tr>
+      <td className="px-4 py-2 border-b border-gray-200">{report.title}</td>
+      <td className="px-4 py-2 border-b border-gray-200">
+        {report.vehicle ? report.vehicle.name : "/"}
+      </td>
+      <td className="px-4 py-2 border-b border-gray-200">
+        {report.user ? report.user.username : "/"}
+      </td>
+      <td className="px-4 py-2 text-center border-b border-gray-200 ">
+        {hasCheckIcon && !report.solved && (
+          <button
+            onClick={() => onSolve && onSolve(report._id)}
+            className="mx-2 text-green-500 hover:text-green-700"
+          >
+            <FaCheck size={20} />
+          </button>
+        )}
+        <button
+          onClick={() => onDelete(report._id)}
+          className="mx-2 text-red-500 hover:text-red-700"
+        >
+          <FaTimes size={20} />
+        </button>
+      </td>
+    </tr>
   );
 };
 

@@ -11,6 +11,7 @@ export interface Report {
   description: string;
   vehicle: Vehicle;
   user: User;
+  solved: boolean;
 }
 
 export interface Reservation {

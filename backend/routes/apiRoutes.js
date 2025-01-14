@@ -12,6 +12,8 @@ import { getAllVehicles } from "../controllers/vehicleController.js";
 import {
   getAllReports,
   reportProblem,
+  editReport,
+  deleteReport,
 } from "../controllers/reportController.js";
 
 const router = express.Router();
@@ -31,6 +33,8 @@ router.delete("/reservations/:id", deleteReservation);
 router.get("/requests", getAllReservations); //provjeri admin
 router.get("/vehicles", getAllVehicles); //provjeri admin
 router.get("/reports", getAllReports); //provjeri admin
+router.patch("/reports/:id", editReport);
+router.delete("/reports/:id", deleteReport);
 router.patch("/reservations/:id", editReservation);
 
 export default router;

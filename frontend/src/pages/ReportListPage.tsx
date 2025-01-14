@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ReportListTable from "../components/ReportListTable";
 import { Report } from "../data/models";
+import { FaTimes, FaCheck } from "react-icons/fa";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -20,10 +21,60 @@ const ReportListPage: React.FC = () => {
     fetchReports();
   }, []);
 
+  const handleSolve = async (reportId: string) => {
+    try {
+      await axios.patch(`${BASE_URL}/api/reports/${reportId}`, {
+        solved: true,
+      });
+      setReports((prevReports) =>
+        prevReports.map((report) =>
+          report._id === reportId ? { ...report, solved: true } : report
+        )
+      );
+      alert("Prijava problema je uspješno riješena.");
+    } catch (error) {
+      console.error("Error updating report:", error);
+      alert("Došlo je do greške prilikom rješavanja prijave problema.");
+    }
+  };
+
+  const handleDelete = async (reportId: string) => {
+    try {
+      await axios.delete(`${BASE_URL}/api/reports/${reportId}`);
+      setReports((prevReports) =>
+        prevReports.filter((report) => report._id !== reportId)
+      );
+      //alert("Prijava problema je uspješno izbrisana.");
+    } catch (error) {
+      console.error("Error deleting report:", error);
+      alert("Došlo je do greške prilikom brisanja prijave problema.");
+    }
+  };
+
+  // Separate reports by solved status
+  const unsolvedReports = reports.filter((report) => !report.solved);
+  const solvedReports = reports.filter((report) => report.solved);
+
   return (
     <div className="flex flex-col items-center justify-start min-h-screen p-6 bg-gray-100">
       <h1 className="mb-6 text-3xl font-bold">Prijavljeni problemi</h1>
-      <ReportListTable reports={reports} />
+
+      {/* Unresolved reports table */}
+      <ReportListTable
+        title="Neriješene prijave problema"
+        reports={unsolvedReports}
+        onSolve={handleSolve}
+        onDelete={handleDelete}
+        hasCheckIcon={true}
+      />
+
+      {/* Solved reports table */}
+      <ReportListTable
+        title="Riješene prijave problema"
+        reports={solvedReports}
+        onDelete={handleDelete}
+        hasCheckIcon={false}
+      />
     </div>
   );
 };

@@ -48,8 +48,8 @@ const reportShema = new Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
   vehicle: { type: Schema.Types.ObjectId, ref: "Vehicle" },
-  //vehicle: { type: String },
   user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  solved: { type: Boolean, default: false },
 });
 const Report = mongoose.model("Report", reportShema);
 
