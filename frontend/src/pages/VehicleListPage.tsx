@@ -69,6 +69,13 @@ const VehicleListPage: React.FC = () => {
   };
 
   const handleDelete = async (vehicleId: string) => {
+    const confirmCancel = window.confirm(
+      "Jeste li sigurni da želite izbrisati ovo vozilo?"
+    );
+
+    if (!confirmCancel) {
+      return;
+    }
     try {
       await axios.delete(`${BASE_URL}/api/vehicle/${vehicleId}`);
       setVehicles((prev) =>

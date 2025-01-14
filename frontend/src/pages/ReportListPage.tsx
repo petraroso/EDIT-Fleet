@@ -39,6 +39,13 @@ const ReportListPage: React.FC = () => {
   };
 
   const handleDelete = async (reportId: string) => {
+    const confirmCancel = window.confirm(
+      "Jeste li sigurni da želite izbrisati ovu prijavu problema?"
+    );
+
+    if (!confirmCancel) {
+      return;
+    }
     try {
       await axios.delete(`${BASE_URL}/api/reports/${reportId}`);
       setReports((prevReports) =>
