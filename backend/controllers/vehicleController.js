@@ -9,3 +9,21 @@ export const getAllVehicles = async (req, res) => {
     res.status(500).json({ error: "Dogodila se greška na serveru" });
   }
 };
+
+export const editVehicle = async (req, res) => {
+  try {
+    const vehicleFromDb = await Vehicle.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+      }
+    );
+    if (!vehicleFromDb) {
+      return res.status(404).send("Vozilo ne postoji");
+    }
+    res.json(vehicleFromDb);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};

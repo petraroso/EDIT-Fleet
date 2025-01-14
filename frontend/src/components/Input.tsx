@@ -2,7 +2,7 @@
 import React from "react";
 
 interface InputProps {
-  label: string;
+  label?: string;
   type?: string;
   value: string;
   onChange: (
@@ -18,7 +18,7 @@ const Input: React.FC<InputProps> = ({
 }) => {
   return (
     <div className="mb-4">
-      <label className="block mb-2 font-semibold">{label}:</label>
+      {label && <label className="block mb-2 font-semibold">{label}:</label>}
       {type === "textarea" ? (
         <textarea
           value={value}
