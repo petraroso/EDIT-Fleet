@@ -73,7 +73,7 @@ export const deleteReservation = async (req, res) => {
   }
 };
 
-export const editReservationApproval = async (req, res) => {
+export const editReservation = async (req, res) => {
   try {
     const reservationFromDb = await Reservation.findByIdAndUpdate(
       req.params.id,

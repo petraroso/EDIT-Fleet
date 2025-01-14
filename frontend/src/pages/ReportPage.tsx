@@ -90,7 +90,7 @@ const ReportPage: React.FC = () => {
             onChange={(e) => setVehicleId(e.target.value)}
             className="w-full p-2 border rounded"
           >
-            <option value="">Odaberite vozilo</option>
+            <option value="">Odabir vozila</option>
             {vehicles.map((vehicle) => (
               <option key={vehicle._id} value={vehicle._id}>
                 {vehicle.name}

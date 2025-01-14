@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaTimes, FaCheck } from "react-icons/fa";
 import Button from "./Button";
-import { Reservation } from "../data/models";
+import { Reservation, Vehicle } from "../data/models";
 
 interface RequestTableRowProps {
   reservation: Reservation;
   onApprove?: (reservationId: string) => void;
   onReject?: (reservationId: string) => void;
   isApprovalTable?: boolean;
+  vehicles: Vehicle[];
+  handleVehicleChange: (reservationId: string, vehicleId: string) => void;
 }
 
 const RequestTableRow: React.FC<RequestTableRowProps> = ({
@@ -15,7 +17,10 @@ const RequestTableRow: React.FC<RequestTableRowProps> = ({
   onApprove,
   onReject,
   isApprovalTable,
+  vehicles,
+  handleVehicleChange,
 }) => {
+  const [vehicleId, setVehicleId] = useState("");
   return (
     <tr>
       <td className="w-1/6 px-4 py-2 border-b border-gray-200">
@@ -30,7 +35,30 @@ const RequestTableRow: React.FC<RequestTableRowProps> = ({
       </td>
 
       <td className="w-1/6 px-4 py-2 border-b border-gray-200">
-        {reservation.vehicle ? reservation.vehicle.name : "/"}
+        {reservation.vehicle ? (
+          reservation.vehicle.name
+        ) : (
+          <div className="flex flex-col">
+            <select
+              value={vehicleId}
+              onChange={(e) => setVehicleId(e.target.value)}
+              className="w-full p-2 border rounded"
+            >
+              <option value="">Odabir vozila</option>
+              {vehicles.map((vehicle) => (
+                <option key={vehicle._id} value={vehicle._id}>
+                  {vehicle.name}
+                </option>
+              ))}
+            </select>
+            <Button
+              label={"Primjenite"}
+              type="submit"
+              className="w-full mt-4"
+              onClick={() => handleVehicleChange(reservation._id, vehicleId)}
+            />
+          </div>
+        )}
       </td>
       <td className="w-1/6 px-4 py-2 border-b border-gray-200">
         {reservation.user ? reservation.user.username : "/"}

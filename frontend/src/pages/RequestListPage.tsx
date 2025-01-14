@@ -1,12 +1,28 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import RequestTableRow from "../components/RequestTableRow";
-import { Reservation } from "../data/models";
+import { Reservation, Vehicle } from "../data/models";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const RequestListPage: React.FC = () => {
   const [reservations, setReservations] = useState<Reservation[]>([]);
+  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+
+  useEffect(() => {
+    const fetchVehicles = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/api/vehicles`);
+        const availableVehicles = response.data.filter(
+          (vehicle: Vehicle) => vehicle.available
+        );
+        setVehicles(availableVehicles);
+      } catch (error) {
+        console.error("Error fetching vehicles:", error);
+      }
+    };
+    fetchVehicles();
+  }, []);
 
   useEffect(() => {
     const fetchReservations = async () => {
@@ -57,6 +73,34 @@ const RequestListPage: React.FC = () => {
     }
   };
 
+  const handleVehicleChange = async (
+    reservationId: string,
+    vehicleId: string
+  ) => {
+    try {
+      const updatedVehicle = vehicles.find(
+        (vehicle) => vehicle._id === vehicleId
+      );
+      if (!updatedVehicle) {
+        throw new Error("Vozilo nije pronađeno.");
+      }
+      await axios.patch(`${BASE_URL}/api/reservations/${reservationId}`, {
+        vehicle: vehicleId,
+      });
+
+      setReservations((prevReservations) =>
+        prevReservations.map((res) =>
+          res._id === reservationId ? { ...res, vehicle: updatedVehicle } : res
+        )
+      );
+
+      alert("Vozilo uspješno dodijeljeno rezervaciji.");
+    } catch (error) {
+      console.error("Error approving reservation:", error);
+      alert("Došlo je do greške prilikom dodjeljivanja vozila rezervaciji.");
+    }
+  };
+
   const unapprovedReservations = reservations.filter((res) => !res.approved);
   const approvedReservations = reservations.filter((res) => res.approved);
 
@@ -87,6 +131,8 @@ const RequestListPage: React.FC = () => {
                   onApprove={handleApprove}
                   onReject={handleReject}
                   isApprovalTable={true}
+                  vehicles={vehicles}
+                  handleVehicleChange={handleVehicleChange}
                 />
               ))
             ) : (
@@ -123,6 +169,8 @@ const RequestListPage: React.FC = () => {
                   onApprove={handleApprove}
                   onReject={handleReject}
                   isApprovalTable={false}
+                  vehicles={vehicles}
+                  handleVehicleChange={handleVehicleChange}
                 />
               ))
             ) : (

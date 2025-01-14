@@ -6,7 +6,7 @@ import {
   getReservations,
   getAllReservations,
   deleteReservation,
-  editReservationApproval,
+  editReservation,
 } from "../controllers/reservationController.js";
 import { getAllVehicles } from "../controllers/vehicleController.js";
 import {
@@ -31,6 +31,6 @@ router.delete("/reservations/:id", deleteReservation);
 router.get("/requests", getAllReservations); //provjeri admin
 router.get("/vehicles", getAllVehicles); //provjeri admin
 router.get("/reports", getAllReports); //provjeri admin
-router.patch("/reservations/:id", editReservationApproval);
+router.patch("/reservations/:id", editReservation);
 
 export default router;
