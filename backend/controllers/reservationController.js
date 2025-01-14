@@ -66,3 +66,21 @@ export const deleteReservation = async (req, res) => {
     res.status(500).send(error.message);
   }
 };
+
+export const editReservationApproval = async (req, res) => {
+  try {
+    const reservationFromDb = await Reservation.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+      }
+    );
+    if (!reservationFromDb) {
+      return res.status(404).send("Rezervacija ne postoji");
+    }
+    res.json(reservationFromDb);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};

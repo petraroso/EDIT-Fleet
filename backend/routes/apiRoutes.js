@@ -6,6 +6,7 @@ import {
   getReservations,
   getAllReservations,
   deleteReservation,
+  editReservationApproval,
 } from "../controllers/reservationController.js";
 import { getAllVehicles } from "../controllers/vehicleController.js";
 import {
@@ -22,12 +23,14 @@ router.post("/login", loginUser);
 router.post("/reserve", fetchUser, reserveCar);
 router.get("/reservations", fetchUser, getReservations);
 router.post("/report", fetchUser, reportProblem);
+
+//user i admin
 router.delete("/reservations/:id", deleteReservation);
 
 //admin
 router.get("/requests", getAllReservations); //provjeri admin
 router.get("/vehicles", getAllVehicles); //provjeri admin
 router.get("/reports", getAllReports); //provjeri admin
-//router.patch("/reserve", reserveCarEdit);
+router.patch("/reservations/:id", editReservationApproval);
 
 export default router;

@@ -22,16 +22,18 @@ const RequestListPage: React.FC = () => {
 
   const handleApprove = async (reservationId: string) => {
     try {
-      //await axios.patch(`/api/reservations/${reservationId}`, {
-      //  approved: true,
-      //});
+      await axios.patch(`${BASE_URL}/api/reservations/${reservationId}`, {
+        approved: true,
+      });
       setReservations((prevReservations) =>
         prevReservations.map((res) =>
           res._id === reservationId ? { ...res, approved: true } : res
         )
       );
+      alert("Rezervacija je uspješno odobrena.");
     } catch (error) {
       console.error("Error approving reservation:", error);
+      alert("Došlo je do greške prilikom odobravanja rezervacije.");
     }
   };
 
