@@ -10,6 +10,18 @@ export const getAllVehicles = async (req, res) => {
   }
 };
 
+export const deleteVehicle = async (req, res) => {
+  try {
+    const vehicleFromDb = await Vehicle.findByIdAndDelete(req.params.id);
+    if (!vehicleFromDb) {
+      return res.status(404).send("Vozilo ne postoji");
+    }
+    res.send("Vozilo izbrisano");
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
 export const editVehicle = async (req, res) => {
   try {
     const vehicleFromDb = await Vehicle.findByIdAndUpdate(

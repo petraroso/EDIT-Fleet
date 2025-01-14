@@ -22,6 +22,7 @@ interface VehicleListTableProps {
       technicalDate: string;
     }>
   >;
+  onDelete: (reportId: string) => void;
 }
 
 const VehicleListTable: React.FC<VehicleListTableProps> = ({
@@ -33,6 +34,7 @@ const VehicleListTable: React.FC<VehicleListTableProps> = ({
   onCancelEdit,
   onSaveEdit,
   setEditValues,
+  onDelete,
 }) => {
   return (
     <div className="w-full mb-8">
@@ -117,12 +119,20 @@ const VehicleListTable: React.FC<VehicleListTableProps> = ({
                         </button>
                       </>
                     ) : (
-                      <button
-                        onClick={() => onEdit(vehicle)}
-                        className="mx-2 text-blue-500 hover:text-blue-700"
-                      >
-                        <FaEdit size={20} />
-                      </button>
+                      <>
+                        <button
+                          onClick={() => onEdit(vehicle)}
+                          className="mx-2 text-blue-500 hover:text-blue-700"
+                        >
+                          <FaEdit size={20} />
+                        </button>
+                        <button
+                          onClick={() => onDelete(vehicle._id)}
+                          className="mx-2 text-red-500 hover:text-red-700"
+                        >
+                          <FaTimes size={20} />
+                        </button>
+                      </>
                     )}
                   </td>
                 </tr>

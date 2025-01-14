@@ -46,7 +46,7 @@ const VehicleListPage: React.FC = () => {
     try {
       const updatedValues = {
         ...editValues,
-        technicalDate: new Date(editValues.technicalDate), 
+        technicalDate: new Date(editValues.technicalDate),
       };
 
       await axios.patch(`${BASE_URL}/api/vehicle/${vehicleId}`, updatedValues);
@@ -68,6 +68,19 @@ const VehicleListPage: React.FC = () => {
     }
   };
 
+  const handleDelete = async (vehicleId: string) => {
+    try {
+      await axios.delete(`${BASE_URL}/api/vehicle/${vehicleId}`);
+      setVehicles((prev) =>
+        prev.filter((vehicle) => vehicle._id !== vehicleId)
+      );
+      //alert("Vozilo je uspješno izbrisano.");
+    } catch (error) {
+      console.error("Error deleting report:", error);
+      alert("Došlo je do greške prilikom brisanja vozila.");
+    }
+  };
+
   const availableVehicles = vehicles.filter((vehicle) => vehicle.available);
   const unavailableVehicles = vehicles.filter((vehicle) => !vehicle.available);
 
@@ -84,6 +97,7 @@ const VehicleListPage: React.FC = () => {
         onCancelEdit={handleCancelEdit}
         onSaveEdit={handleSaveEdit}
         setEditValues={setEditValues}
+        onDelete={handleDelete}
       />
       <VehicleListTable
         title="Nedostupna vozila"
@@ -94,6 +108,7 @@ const VehicleListPage: React.FC = () => {
         onCancelEdit={handleCancelEdit}
         onSaveEdit={handleSaveEdit}
         setEditValues={setEditValues}
+        onDelete={handleDelete}
       />
     </div>
   );
