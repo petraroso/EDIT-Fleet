@@ -15,8 +15,8 @@ const ReportRow: React.FC<ReportRowProps> = ({ report }) => {
         onClick={() => setIsExpanded((prev) => !prev)}
       >
         <td className="px-4 py-2">{report.title}</td>
-        <td className="px-4 py-2">{report.vehicle}</td>
-        <td className="px-4 py-2">{report.user}</td>
+        <td className="px-4 py-2">{report.vehicle || "/"}</td>
+        <td className="px-4 py-2">{report.user || "/"}</td>
       </tr>
       {isExpanded && (
         <tr className="bg-gray-50">

@@ -1,4 +1,5 @@
 export interface User {
+  _id?: string;
   username: string;
   email: string;
   role: "User" | "Admin";
@@ -18,6 +19,7 @@ export interface Reservation {
   period: string;
   purpose: string;
   approved: boolean;
+  vehicle: string;
   user: string;
 }
 

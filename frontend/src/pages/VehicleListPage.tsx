@@ -11,8 +11,8 @@ const VehicleListPage: React.FC = () => {
   useEffect(() => {
     const fetchVehicles = async () => {
       try {
-        //const response = await axios.get("/api/vehicles");
-        //setVehicles(response.data);
+        const response = await axios.get(`${BASE_URL}/api/vehicles`);
+        setVehicles(response.data);
       } catch (error) {
         console.error("Error fetching vehicles:", error);
       }

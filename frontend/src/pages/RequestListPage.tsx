@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import TableRow from "../components/TableRow";
+import RequestTableRow from "../components/RequestTableRow";
 import { Reservation } from "../data/models";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -11,8 +11,8 @@ const RequestListPage: React.FC = () => {
   useEffect(() => {
     const fetchReservations = async () => {
       try {
-        //const response = await axios.get("/api/reservations");
-        //setReservations(response.data);
+        const response = await axios.get(`${BASE_URL}/api/requests`);
+        setReservations(response.data);
       } catch (error) {
         console.error("Error fetching reservations:", error);
       }
@@ -59,23 +59,24 @@ const RequestListPage: React.FC = () => {
         <table className="w-full bg-white rounded-md shadow-md table-auto">
           <thead className="bg-gray-200">
             <tr>
-              <th className="w-1/5 px-4 py-2">Tip vozila</th>
-              <th className="w-1/5 px-4 py-2">Period</th>
-              <th className="w-1/5 px-4 py-2">Svrha</th>
-              <th className="w-1/5 px-4 py-2">Korisnik</th>
-              <th className="w-1/5 px-4 py-2 text-center">Akcija</th>
+              <th className="w-1/6 px-4 py-2 text-left">Tip vozila</th>
+              <th className="w-1/6 px-4 py-2 text-left">Period</th>
+              <th className="w-1/6 px-4 py-2 text-left">Svrha</th>
+              <th className="w-1/6 px-4 py-2 text-left">Vozilo</th>
+              <th className="w-1/6 px-4 py-2 text-left">Korisnik</th>
+              <th className="w-1/6 px-4 py-2 text-center">Akcija</th>
             </tr>
           </thead>
           <tbody>
             {unapprovedReservations.length > 0 ? (
               unapprovedReservations.map((reservation) => (
-                <TableRow
+                <RequestTableRow
                   key={reservation._id}
                   reservation={reservation}
                   onApprove={handleApprove}
                   onReject={handleReject}
                   isApprovalTable={true}
-                  admin={true}
+                  
                 />
               ))
             ) : (
@@ -95,23 +96,24 @@ const RequestListPage: React.FC = () => {
         <table className="w-full bg-white rounded-md shadow-md table-auto">
           <thead className="bg-gray-200">
             <tr>
-              <th className="w-1/5 px-4 py-2">Tip vozila</th>
-              <th className="w-1/5 px-4 py-2">Period</th>
-              <th className="w-1/5 px-4 py-2">Svrha</th>
-              <th className="w-1/5 px-4 py-2">Korisnik</th>
-              <th className="w-1/5 px-4 py-2 text-center">Akcija</th>
+              <th className="w-1/6 px-4 py-2 text-left">Tip vozila</th>
+              <th className="w-1/6 px-4 py-2 text-left">Period</th>
+              <th className="w-1/6 px-4 py-2 text-left">Svrha</th>
+              <th className="w-1/6 px-4 py-2 text-left">Vozilo</th>
+              <th className="w-1/6 px-4 py-2 text-left">Korisnik</th>
+              <th className="w-1/6 px-4 py-2 text-center">Akcija</th>
             </tr>
           </thead>
           <tbody>
             {approvedReservations.length > 0 ? (
               approvedReservations.map((reservation) => (
-                <TableRow
+                <RequestTableRow
                   key={reservation._id}
                   reservation={reservation}
                   onApprove={handleApprove}
                   onReject={handleReject}
                   isApprovalTable={true}
-                  admin={true}
+                  
                 />
               ))
             ) : (

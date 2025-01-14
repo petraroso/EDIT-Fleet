@@ -13,19 +13,35 @@ const ReportPage: React.FC = () => {
   const handleReport = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Construct report data
-    const reportData = {
-      title,
-      description,
-      vehicle,
-    };
+    if (title !== "" && description !== "" && vehicle !== "") {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("Niste prijavljeni. Molimo prijavite se prije prijave problema.");
+        return;
+      }
 
-    try {
-      //const response = await axios.post("/api/report-issue", reportData);
-      //console.log(response.data);
-    } catch (error) {
-      console.error("There was an error with the report submission:", error);
-    }
+      // Construct report data
+      const reportData = {
+        title,
+        description,
+        vehicle,
+      };
+
+      try {
+        const response = await axios.post(
+          `${BASE_URL}/api/report`,
+          reportData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(response.data);
+      } catch (error) {
+        console.error("There was an error with the report submission:", error);
+      }
+    } else alert("Ispunite sva polja.");
   };
 
   return (

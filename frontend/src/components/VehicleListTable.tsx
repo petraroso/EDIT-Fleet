@@ -17,14 +17,14 @@ const VehicleListTable: React.FC<VehicleListTableProps> = ({
         <table className="w-full bg-white rounded-md shadow-md table-auto">
           <thead className="bg-gray-200">
             <tr>
-              <th className="w-1/2 px-4 py-2 ">Ime vozila</th>
-              <th className="w-1/2 px-4 py-2 ">Tip vozila</th>
+              <th className="w-1/2 px-4 py-2 text-left">Ime vozila</th>
+              <th className="w-1/2 px-4 py-2 text-left">Tip vozila</th>
             </tr>
           </thead>
           <tbody>
             {vehicles.length > 0 ? (
               vehicles.map((vehicle) => (
-                <tr>
+                <tr key={vehicle._id}>
                   <td className="px-4 py-2">{vehicle.name}</td>
                   <td className="px-4 py-2">{vehicle.type}</td>
                 </tr>

@@ -3,36 +3,30 @@ import { FaTimes, FaCheck } from "react-icons/fa";
 import Button from "./Button";
 import { Reservation } from "../data/models";
 
-interface TableRowProps {
+interface RequestTableRowProps {
   reservation: Reservation;
   onApprove?: (reservationId: string) => void;
   onReject?: (reservationId: string) => void;
   onCancel?: (reservationId: string) => void;
   isApprovalTable?: boolean;
-  admin: boolean;
 }
 
-const TableRow: React.FC<TableRowProps> = ({
+const RequestTableRow: React.FC<RequestTableRowProps> = ({
   reservation,
   onApprove,
   onReject,
   onCancel,
   isApprovalTable,
-  admin,
 }) => {
   return (
     <tr>
-      <td className="w-1/5 px-4 py-2">{reservation.vehicle_type}</td>
-      <td className="w-1/5 px-4 py-2">{reservation.period}</td>
-      <td className="w-1/5 px-4 py-2">{reservation.purpose}</td>
-      <td className="w-1/5 px-4 py-2">
-        {admin
-          ? reservation.user || "/"
-          : reservation.approved
-          ? "Odobreno"
-          : "Neodobreno"}
-      </td>
-      <td className="w-1/5 px-4 py-2 text-center">
+      <td className="w-1/6 px-4 py-2">{reservation.vehicle_type}</td>
+      <td className="w-1/6 px-4 py-2">{reservation.period}</td>
+      <td className="w-1/6 px-4 py-2">{reservation.purpose}</td>
+
+      <td className="w-1/6 px-4 py-2">{reservation.vehicle || "/"}</td>
+      <td className="w-1/6 px-4 py-2">{reservation.user || "/"}</td>
+      <td className="w-1/6 px-4 py-2 text-center">
         {isApprovalTable ? (
           <div className="flex justify-center gap-4">
             <button
@@ -62,4 +56,4 @@ const TableRow: React.FC<TableRowProps> = ({
   );
 };
 
-export default TableRow;
+export default RequestTableRow;

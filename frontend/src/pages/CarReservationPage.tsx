@@ -12,10 +12,8 @@ const CarReservationPage: React.FC = () => {
 
   // Handle the reservation submit
   const handleReservation = async (e: React.FormEvent) => {
+    e.preventDefault();
     if (vehicleType !== "" && period !== "" && purpose !== "") {
-      e.preventDefault();
-
-      // Dohvati token iz localStorage (ili iz statea ako ga tamo držiš)
       const token = localStorage.getItem("token");
       if (!token) {
         alert("Niste prijavljeni. Molimo prijavite se prije rezervacije.");

@@ -46,7 +46,8 @@ const Vehicle = mongoose.model("Vehicle", vehicleShema);
 const reportShema = new Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
-  vehicle: { type: Schema.Types.ObjectId, ref: "Vehicle" },
+  //vehicle: { type: Schema.Types.ObjectId, ref: "Vehicle" },
+  vehicle: { type: String },
   user: { type: Schema.Types.ObjectId, ref: "User", required: true },
 });
 const Report = mongoose.model("Report", reportShema);
