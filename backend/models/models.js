@@ -41,6 +41,7 @@ const vehicleShema = new Schema({
   name: { type: String, required: true },
   type: { type: String, required: true },
   available: { type: Boolean, default: false },
+  technicalDate: { type: Date },
 });
 const Vehicle = mongoose.model("Vehicle", vehicleShema);
 

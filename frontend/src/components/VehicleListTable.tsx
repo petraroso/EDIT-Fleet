@@ -17,8 +17,9 @@ const VehicleListTable: React.FC<VehicleListTableProps> = ({
         <table className="w-full bg-white rounded-md shadow-md table-auto">
           <thead className="bg-gray-200">
             <tr>
-              <th className="w-1/2 px-4 py-2 text-left">Ime vozila</th>
-              <th className="w-1/2 px-4 py-2 text-left">Tip vozila</th>
+              <th className="w-1/3 px-4 py-2 text-left">Ime vozila</th>
+              <th className="w-1/3 px-4 py-2 text-left">Tip vozila</th>
+              <th className="w-1/3 px-4 py-2 text-left">Tehnički pregled</th>
             </tr>
           </thead>
           <tbody>
@@ -27,6 +28,11 @@ const VehicleListTable: React.FC<VehicleListTableProps> = ({
                 <tr key={vehicle._id}>
                   <td className="px-4 py-2">{vehicle.name}</td>
                   <td className="px-4 py-2">{vehicle.type}</td>
+                  <td className="px-4 py-2">
+                    {vehicle.technicalDate
+                      ? vehicle.technicalDate.toString().substring(0, 10)
+                      : "/"}
+                  </td>
                 </tr>
               ))
             ) : (

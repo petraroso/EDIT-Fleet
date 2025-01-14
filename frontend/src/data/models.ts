@@ -30,4 +30,5 @@ export interface Vehicle {
   name: string;
   type: string;
   available: boolean;
+  technicalDate: Date;
 }
