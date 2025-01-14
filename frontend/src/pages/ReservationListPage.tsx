@@ -25,13 +25,22 @@ const ReservationListPage: React.FC = () => {
   }, []);
 
   const handleCancel = async (reservationId: string) => {
+    const confirmCancel = window.confirm(
+      "Jeste li sigurni da želite otkazati ovu rezervaciju?"
+    );
+  
+    if (!confirmCancel) {
+      return;
+    }
     try {
-      //await axios.delete(`/api/reservations/${reservationId}`);
-      //setReservations((prevReservations) =>
-      //  prevReservations.filter((res) => res._id !== reservationId)
-      //);
+      await axios.delete(`${BASE_URL}/api/reservations/${reservationId}`);
+      setReservations((prevReservations) =>
+        prevReservations.filter((res) => res._id !== reservationId)
+      );
+      alert("Rezervacija je uspješno otkazana.");
     } catch (error) {
       console.error("Error canceling reservation:", error);
+      alert("Došlo je do greške prilikom otkazivanja rezervacije.");
     }
   };
 

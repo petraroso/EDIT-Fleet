@@ -52,3 +52,17 @@ export const getAllReservations = async (req, res) => {
     res.status(500).json({ error: "Dogodila se greška na serveru" });
   }
 };
+
+export const deleteReservation = async (req, res) => {
+  try {
+    const reservationFromDb = await Reservation.findByIdAndDelete(
+      req.params.id
+    );
+    if (!reservationFromDb) {
+      return res.status(404).send("Rezervacija ne postoji");
+    }
+    res.send("Rezervacija izbrisana");
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
