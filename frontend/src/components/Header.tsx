@@ -13,7 +13,9 @@ const Header: React.FC<HeaderProps> = ({ currentUser, onLogout }) => {
 
   return (
     <header className="flex items-center justify-between p-4 text-white bg-gray-800">
-      <div className="flex items-center">FleetLogo</div>
+      <div className="flex items-center text-xl font-bold tracking-wider">
+        FleetLogo
+      </div>
       <div className="flex items-center space-x-4">
         {currentUser && (
           <>
