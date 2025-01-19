@@ -39,7 +39,7 @@ const Form: React.FC<FormProps> = ({ isRegistering, onRegister, onLogin }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-6 bg-white rounded shadow-md w-80"
+      className="p-6 bg-white rounded shadow-md w-96"
     >
       {isRegistering && (
         <Input
