@@ -4,7 +4,11 @@ import {
   verifyToken,
   verifyRole,
 } from "../middleware/middleware.js";
-import { registerUser, loginUser, logoutUser } from "../controllers/userController.js";
+import {
+  registerUser,
+  loginUser,
+  logoutUser,
+} from "../controllers/userController.js";
 import {
   reserveCar,
   getReservations,
@@ -49,6 +53,7 @@ router.post(
 //user i admin
 router.delete("/reservations/:id", verifyToken, deleteReservation);
 router.post("/logout", logoutUser);
+router.get("/vehicles", verifyToken, getAllVehicles);
 
 //admin
 router.get(
@@ -57,13 +62,6 @@ router.get(
   fetchUser,
   verifyRole("Admin"),
   getAllReservations
-); //provjeri admin
-router.get(
-  "/vehicles",
-  verifyToken,
-  fetchUser,
-  verifyRole("Admin"),
-  getAllVehicles
 );
 router.patch(
   "/vehicle/:id",
