@@ -41,15 +41,11 @@ const verifyCookie = (cookieName, JWT_TOKEN_SECRET) => (req, res, next) => {
 };
 //AUTHORIZATION
 const verifyRole = (role) => (req, res, next) => {
-  if (!req.user) {
-    return res.status(401).send("Korisnik nije autentificiran");
+  if (req.user && req.user.role === role) {
+    next();
+  } else {
+    res.status(403).send(`Zabranjen pristup - ${req.user.role} `);
   }
-
-  if (req.user.role === role) {
-    return next();
-  }
-
-  return res.status(403).send(`Zabranjen pristup za ulogu: ${req.user.role}`);
 };
 
 function validateEmail(req, res, next) {

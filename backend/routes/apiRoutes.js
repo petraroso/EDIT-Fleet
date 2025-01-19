@@ -1,5 +1,9 @@
 import express from "express";
-import { fetchUser, verifyToken } from "../middleware/middleware.js";
+import {
+  fetchUser,
+  verifyToken,
+  verifyRole,
+} from "../middleware/middleware.js";
 import { registerUser, loginUser } from "../controllers/userController.js";
 import {
   reserveCar,
@@ -26,21 +30,81 @@ router.post("/register", registerUser);
 router.post("/login", loginUser);
 
 //user
-router.post("/reserve", verifyToken, fetchUser, reserveCar);
-router.get("/reservations", verifyToken, fetchUser, getReservations);
-router.post("/report", verifyToken, fetchUser, reportProblem);
+router.post("/reserve", verifyToken, fetchUser, verifyRole("User"), reserveCar);
+router.get(
+  "/reservations",
+  verifyToken,
+  fetchUser,
+  verifyRole("User"),
+  getReservations
+);
+router.post(
+  "/report",
+  verifyToken,
+  fetchUser,
+  verifyRole("User"),
+  reportProblem
+);
 
 //user i admin
 router.delete("/reservations/:id", verifyToken, deleteReservation);
 
 //admin
-router.get("/requests", verifyToken, getAllReservations); //provjeri admin
-router.get("/vehicles", verifyToken, getAllVehicles);
-router.patch("/vehicle/:id", verifyToken, editVehicle);
-router.delete("/vehicle/:id", verifyToken, deleteVehicle);
-router.get("/reports", verifyToken, getAllReports); 
-router.patch("/reports/:id", verifyToken, editReport);
-router.delete("/reports/:id", verifyToken, deleteReport);
-router.patch("/reservations/:id", verifyToken, editReservation);
+router.get(
+  "/requests",
+  verifyToken,
+  fetchUser,
+  verifyRole("Admin"),
+  getAllReservations
+); //provjeri admin
+router.get(
+  "/vehicles",
+  verifyToken,
+  fetchUser,
+  verifyRole("Admin"),
+  getAllVehicles
+);
+router.patch(
+  "/vehicle/:id",
+  verifyToken,
+  fetchUser,
+  verifyRole("Admin"),
+  editVehicle
+);
+router.delete(
+  "/vehicle/:id",
+  verifyToken,
+  fetchUser,
+  verifyRole("Admin"),
+  deleteVehicle
+);
+router.get(
+  "/reports",
+  verifyToken,
+  fetchUser,
+  verifyRole("Admin"),
+  getAllReports
+);
+router.patch(
+  "/reports/:id",
+  verifyToken,
+  fetchUser,
+  verifyRole("Admin"),
+  editReport
+);
+router.delete(
+  "/reports/:id",
+  verifyToken,
+  fetchUser,
+  verifyRole("Admin"),
+  deleteReport
+);
+router.patch(
+  "/reservations/:id",
+  verifyToken,
+  fetchUser,
+  verifyRole("Admin"),
+  editReservation
+);
 
 export default router;

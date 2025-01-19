@@ -44,7 +44,7 @@ export const loginUser = async (req, res) => {
       korisnikBaza &&
       (await bcrypt.compare(req.body.password, korisnikBaza.password))
     ) {
-      const token = jwt.sign({ _id: korisnikBaza._id }, JWT_TOKEN_SECRET, {
+      const token = jwt.sign({ _id: korisnikBaza._id, role: korisnikBaza.role }, JWT_TOKEN_SECRET, {
         expiresIn: "1h",
       });
 
