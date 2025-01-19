@@ -3,7 +3,7 @@ import { User } from "../models/models.js";
 
 import dotenv from "dotenv";
 
-dotenv.config();
+dotenv.config({ path: ".env.local" });
 
 const JWT_TOKEN_SECRET = process.env.JWT_TOKEN_SECRET;
 

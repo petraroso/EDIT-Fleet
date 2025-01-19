@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import { db } from "./config/db.js";
 import apiRoutes from "./routes/apiRoutes.js";
-dotenv.config();
+dotenv.config({ path: ".env.local" });
 
 const PORT = process.env.PORT || 5000;
 const app = express(); //instance of the express app
