@@ -1,5 +1,4 @@
 import React from "react";
-import { FaTimes, FaCheck } from "react-icons/fa";
 import Button from "./Button";
 import { Reservation } from "../data/models";
 

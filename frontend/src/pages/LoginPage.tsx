@@ -11,7 +11,6 @@ const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const LoginPage: React.FC = () => {
   const [isRegistering, setIsRegistering] = useState(true);
-  //const [currentUser, setCurrentUser] = useState<User | null>(null);
   const { setCurrentUser } = useAuth();
   const navigate = useNavigate();
 

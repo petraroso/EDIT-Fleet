@@ -1,16 +1,26 @@
-// components/Header.tsx
 import React from "react";
-import { NavLink, useNavigate } from "react-router-dom"; // Import useNavigate instead of useHistory
-import { FaSignOutAlt } from "react-icons/fa"; // For the logout icon
+import { NavLink, useNavigate } from "react-router-dom";
+import { FaSignOutAlt } from "react-icons/fa";
 import { useAuth } from "../Context";
+import axios from "axios";
 
-interface HeaderProps {
-  onLogout?: () => void;
-}
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
-const Header: React.FC<HeaderProps> = ({ onLogout }) => {
-  const navigate = useNavigate(); // Use useNavigate instead of useHistory
+const Header: React.FC = () => {
+  const navigate = useNavigate();
   const { currentUser } = useAuth();
+
+  const handleLogout = () => {
+    axios
+      .post(`${BASE_URL}/api/logout`, {}, { withCredentials: true })
+      .then(() => {
+        localStorage.removeItem("token");
+        window.location.href = "/";
+      })
+      .catch((error) => {
+        console.error("Greška pri odjavi:", error);
+      });
+  };
 
   return (
     <header className="flex items-center justify-between p-4 text-white bg-gray-800">
@@ -31,7 +41,7 @@ const Header: React.FC<HeaderProps> = ({ onLogout }) => {
             }
           >
             <FaSignOutAlt
-              onClick={onLogout}
+              onClick={handleLogout}
               className="text-xl cursor-pointer"
             />
           </NavLink>

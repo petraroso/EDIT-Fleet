@@ -46,7 +46,6 @@ const ReportPage: React.FC = () => {
         return;
       }
 
-      // Construct report data
       const reportData = {
         title,
         description,

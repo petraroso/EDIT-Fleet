@@ -1,6 +1,5 @@
-// components/NavigationHeader.tsx
 import React from "react";
-import { NavLink } from "react-router-dom"; // Using react-router-dom v6
+import { NavLink } from "react-router-dom";
 
 const NavigationHeader: React.FC = () => {
   return (

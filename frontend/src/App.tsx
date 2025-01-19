@@ -10,12 +10,13 @@ import VehicleListPage from "./pages/VehicleListPage";
 import ReportListPage from "./pages/ReportListPage";
 import Header from "./components/Header";
 import NavigationHeader from "./components/NavigationHeader";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Header />
-
       <NavigationHeader />
       <Routes>
         <Route path="/" element={<LoginPage />} />

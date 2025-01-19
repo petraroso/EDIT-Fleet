@@ -69,3 +69,19 @@ export const loginUser = async (req, res) => {
     res.status(500).send(error.message);
   }
 };
+
+export const logoutUser = async (req, res) => {
+  try {
+
+    res.clearCookie("accessToken", {
+      httpOnly: true,
+      secure: false, // Produciton true
+    });
+
+    res.status(200).json({
+      message: "Odjava uspješna",
+    });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};

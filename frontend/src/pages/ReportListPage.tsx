@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ReportListTable from "../components/ReportListTable";
 import { Report } from "../data/models";
-import { FaTimes, FaCheck } from "react-icons/fa";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
