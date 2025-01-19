@@ -8,9 +8,10 @@ interface FormProps {
     username: string,
     email: string,
     password: string,
-    type: "User" | "Admin"
+    type: "User" | "Admin",
+    resetForm: () => void
   ) => void;
-  onLogin: (email: string, password: string) => void;
+  onLogin: (email: string, password: string, resetForm: () => void) => void;
 }
 
 const Form: React.FC<FormProps> = ({ isRegistering, onRegister, onLogin }) => {
@@ -19,19 +20,26 @@ const Form: React.FC<FormProps> = ({ isRegistering, onRegister, onLogin }) => {
   const [password, setPassword] = useState("");
   const [type, setType] = useState<"User" | "Admin">("User");
 
+  const resetForm = () => {
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setType("User");
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (isRegistering) {
-      onRegister(username, email, password, type);
+      onRegister(username, email, password, type, resetForm);
     } else {
-      onLogin(email, password);
+      onLogin(email, password, resetForm);
     }
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white p-6 rounded shadow-md w-80"
+      className="p-6 bg-white rounded shadow-md w-80"
     >
       {isRegistering && (
         <Input
@@ -82,7 +90,7 @@ const Form: React.FC<FormProps> = ({ isRegistering, onRegister, onLogin }) => {
       <Button
         label={isRegistering ? "Registriraj se" : "Prijava"}
         type="submit"
-        className="mt-4 w-full"
+        className="w-full mt-4"
       />
     </form>
   );

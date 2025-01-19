@@ -4,6 +4,7 @@ import Button from "../components/Button";
 import { User } from "../data/models";
 import axios from "axios";
 import { useAuth } from "../Context";
+import { useNavigate } from "react-router-dom";
 //import Cookies from "js-cookie";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
@@ -12,8 +13,13 @@ const LoginPage: React.FC = () => {
   const [isRegistering, setIsRegistering] = useState(true);
   //const [currentUser, setCurrentUser] = useState<User | null>(null);
   const { setCurrentUser } = useAuth();
+  const navigate = useNavigate();
 
-  const handleLogin = (email: string, password: string) => {
+  const handleLogin = (
+    email: string,
+    password: string,
+    resetForm: () => void
+  ) => {
     axios
       .post(
         `${BASE_URL}/api/login`,
@@ -31,6 +37,12 @@ const LoginPage: React.FC = () => {
           email,
           role: response.data.user.role,
         });
+        resetForm();
+        if (response.data.user.role == "User") {
+          navigate("/reserve");
+        } else if (response.data.user.role == "Admin") {
+          navigate("/requests");
+        }
       })
       .catch((error) => {
         console.error("Greška kod prijave:", error);
@@ -41,7 +53,8 @@ const LoginPage: React.FC = () => {
     username: string,
     email: string,
     password: string,
-    role: "User" | "Admin"
+    role: "User" | "Admin",
+    resetForm: () => void
   ) => {
     axios
       .post(
@@ -52,6 +65,12 @@ const LoginPage: React.FC = () => {
       .then((response) => {
         localStorage.setItem("token", response.data.token);
         setCurrentUser({ username, email, role });
+        resetForm();
+        if (response.data.user.role == "User") {
+          navigate("/reserve");
+        } else if (response.data.user.role == "Admin") {
+          navigate("/requests");
+        }
       })
       .catch((error) => {
         console.error("Greška kod prijave:", error);
@@ -69,7 +88,11 @@ const LoginPage: React.FC = () => {
         onLogin={handleLogin}
       />
       <Button
-        label={isRegistering ? "Prebaci na Prijavu" : "Prebaci na Registraciju"}
+        label={
+          isRegistering
+            ? "Prebacite se na prijavu"
+            : "Prebacite se na registraciju"
+        }
         onClick={() => setIsRegistering((prev) => !prev)}
         className="mt-4"
       />
