@@ -14,7 +14,7 @@ import NavigationHeader from "./components/NavigationHeader";
 function App() {
   return (
     <BrowserRouter>
-      <Header currentUser="NekoIme" />
+      <Header />
 
       <NavigationHeader />
       <Routes>
