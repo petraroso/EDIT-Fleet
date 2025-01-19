@@ -6,20 +6,25 @@ import { User } from "../models/models.js";
 dotenv.config();
 
 const JWT_TOKEN_SECRET = process.env.JWT_TOKEN_SECRET;
+const PRODUCTION = process.env.PRODUCTION;
 const saltRunde = 10;
 
 export const registerUser = async (req, res) => {
   try {
     const hashLozinka = await bcrypt.hash(req.body.password, saltRunde);
     const noviKorisnik = new User({ ...req.body, password: hashLozinka });
-    const token = jwt.sign({ _id: noviKorisnik._id, role: noviKorisnik.role }, JWT_TOKEN_SECRET, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign(
+      { _id: noviKorisnik._id, role: noviKorisnik.role },
+      JWT_TOKEN_SECRET,
+      {
+        expiresIn: "1h",
+      }
+    );
 
     res.cookie("accessToken", token, {
       httpOnly: true,
       maxAge: 3600000, // 1 sat
-      secure: false,
+      secure: PRODUCTION == true ? true : false,
     });
 
     await noviKorisnik.save();
@@ -44,14 +49,18 @@ export const loginUser = async (req, res) => {
       korisnikBaza &&
       (await bcrypt.compare(req.body.password, korisnikBaza.password))
     ) {
-      const token = jwt.sign({ _id: korisnikBaza._id, role: korisnikBaza.role }, JWT_TOKEN_SECRET, {
-        expiresIn: "1h",
-      });
+      const token = jwt.sign(
+        { _id: korisnikBaza._id, role: korisnikBaza.role },
+        JWT_TOKEN_SECRET,
+        {
+          expiresIn: "1h",
+        }
+      );
 
       res.cookie("accessToken", token, {
         httpOnly: true,
         maxAge: 3600000, // 1 sat
-        secure: false,
+        secure: PRODUCTION == true ? true : false,
       });
 
       res.status(200).json({
@@ -72,10 +81,9 @@ export const loginUser = async (req, res) => {
 
 export const logoutUser = async (req, res) => {
   try {
-
     res.clearCookie("accessToken", {
       httpOnly: true,
-      secure: false, // Produciton true
+      secure: PRODUCTION == true ? true : false,
     });
 
     res.status(200).json({
