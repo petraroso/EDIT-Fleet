@@ -12,7 +12,7 @@ export const registerUser = async (req, res) => {
   try {
     const hashLozinka = await bcrypt.hash(req.body.password, saltRunde);
     const noviKorisnik = new User({ ...req.body, password: hashLozinka });
-    const token = jwt.sign({ _id: noviKorisnik._id }, JWT_TOKEN_SECRET, {
+    const token = jwt.sign({ _id: noviKorisnik._id, role: noviKorisnik.role }, JWT_TOKEN_SECRET, {
       expiresIn: "1h",
     });
 
