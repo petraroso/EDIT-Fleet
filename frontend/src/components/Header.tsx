@@ -14,6 +14,7 @@ const Header: React.FC = () => {
       .post(`${BASE_URL}/api/logout`, {}, { withCredentials: true })
       .then(() => {
         localStorage.removeItem("token");
+        localStorage.removeItem("currentUser");
         window.location.href = "/";
       })
       .catch((error) => {
