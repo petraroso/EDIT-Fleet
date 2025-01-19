@@ -1,5 +1,5 @@
 import express from "express";
-import { fetchUser } from "../middleware/middleware.js";
+import { fetchUser, verifyToken } from "../middleware/middleware.js";
 import { registerUser, loginUser } from "../controllers/userController.js";
 import {
   reserveCar,
@@ -26,21 +26,21 @@ router.post("/register", registerUser);
 router.post("/login", loginUser);
 
 //user
-router.post("/reserve", fetchUser, reserveCar);
-router.get("/reservations", fetchUser, getReservations);
-router.post("/report", fetchUser, reportProblem);
+router.post("/reserve", verifyToken, fetchUser, reserveCar);
+router.get("/reservations", verifyToken, fetchUser, getReservations);
+router.post("/report", verifyToken, fetchUser, reportProblem);
 
 //user i admin
-router.delete("/reservations/:id", deleteReservation);
+router.delete("/reservations/:id", verifyToken, deleteReservation);
 
 //admin
-router.get("/requests", getAllReservations); //provjeri admin
-router.get("/vehicles", getAllVehicles); //provjeri admin
-router.patch("/vehicle/:id", editVehicle);
-router.delete("/vehicle/:id", deleteVehicle);
-router.get("/reports", getAllReports); //provjeri admin
-router.patch("/reports/:id", editReport);
-router.delete("/reports/:id", deleteReport);
-router.patch("/reservations/:id", editReservation);
+router.get("/requests", verifyToken, getAllReservations); //provjeri admin
+router.get("/vehicles", verifyToken, getAllVehicles);
+router.patch("/vehicle/:id", verifyToken, editVehicle);
+router.delete("/vehicle/:id", verifyToken, deleteVehicle);
+router.get("/reports", verifyToken, getAllReports); 
+router.patch("/reports/:id", verifyToken, editReport);
+router.delete("/reports/:id", verifyToken, deleteReport);
+router.patch("/reservations/:id", verifyToken, editReservation);
 
 export default router;

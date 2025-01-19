@@ -11,8 +11,17 @@ const ReportListPage: React.FC = () => {
 
   useEffect(() => {
     const fetchReports = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("Niste prijavljeni. Molimo prijavite se.");
+        return;
+      }
       try {
-        const response = await axios.get(`${BASE_URL}/api/reports`);
+        const response = await axios.get(`${BASE_URL}/api/reports`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setReports(response.data);
       } catch (error) {
         console.error("Error fetching problems:", error);
@@ -22,10 +31,23 @@ const ReportListPage: React.FC = () => {
   }, []);
 
   const handleSolve = async (reportId: string) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Niste prijavljeni. Molimo prijavite se.");
+      return;
+    }
     try {
-      await axios.patch(`${BASE_URL}/api/reports/${reportId}`, {
-        solved: true,
-      });
+      await axios.patch(
+        `${BASE_URL}/api/reports/${reportId}`,
+        {
+          solved: true,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setReports((prevReports) =>
         prevReports.map((report) =>
           report._id === reportId ? { ...report, solved: true } : report
@@ -46,8 +68,17 @@ const ReportListPage: React.FC = () => {
     if (!confirmCancel) {
       return;
     }
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Niste prijavljeni. Molimo prijavite se.");
+      return;
+    }
     try {
-      await axios.delete(`${BASE_URL}/api/reports/${reportId}`);
+      await axios.delete(`${BASE_URL}/api/reports/${reportId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setReports((prevReports) =>
         prevReports.filter((report) => report._id !== reportId)
       );

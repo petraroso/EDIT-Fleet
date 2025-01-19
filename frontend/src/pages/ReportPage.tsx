@@ -14,8 +14,17 @@ const ReportPage: React.FC = () => {
 
   useEffect(() => {
     const fetchVehicles = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("Niste prijavljeni. Molimo prijavite se.");
+        return;
+      }
       try {
-        const response = await axios.get(`${BASE_URL}/api/vehicles`);
+        const response = await axios.get(`${BASE_URL}/api/vehicles`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const availableVehicles = response.data.filter(
           (vehicle: Vehicle) => vehicle.available
         );

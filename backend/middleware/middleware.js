@@ -8,7 +8,7 @@ dotenv.config();
 const JWT_TOKEN_SECRET = process.env.JWT_TOKEN_SECRET;
 
 //middleware za verifikaciju jwt tokena
-const verifyToken = (JWT_TOKEN_SECRET) => (req, res, next) => {
+const verifyToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (!authHeader)
     return res.status(403).send("Ne postoji autorizacijsko zaglavlje");
@@ -16,11 +16,13 @@ const verifyToken = (JWT_TOKEN_SECRET) => (req, res, next) => {
   const token = authHeader.split(" ")[1];
   if (!token) return res.status(403).send("Bearer token nije pronađen");
 
-  jwt.verify(token, JWT_TOKEN_SECRET, (err, user) => {
-    if (err) return res.status(403).json({ error: "Neispravan token" });
-    req.user = user;
-    next();
-  });
+  try {
+    const decodedTokenUser = jwt.verify(token, JWT_TOKEN_SECRET);
+    req.user = decodedTokenUser;
+  } catch (err) {
+    return res.status(401).send('Neispravan token');
+  }
+  return next();
 };
 
 const verifyCookie = (cookieName, JWT_TOKEN_SECRET) => (req, res, next) => {

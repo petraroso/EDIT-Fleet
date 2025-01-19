@@ -11,8 +11,17 @@ const RequestListPage: React.FC = () => {
 
   useEffect(() => {
     const fetchVehicles = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("Niste prijavljeni. Molimo prijavite se.");
+        return;
+      }
       try {
-        const response = await axios.get(`${BASE_URL}/api/vehicles`);
+        const response = await axios.get(`${BASE_URL}/api/vehicles`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const availableVehicles = response.data.filter(
           (vehicle: Vehicle) => vehicle.available
         );
@@ -26,8 +35,17 @@ const RequestListPage: React.FC = () => {
 
   useEffect(() => {
     const fetchReservations = async () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("Niste prijavljeni. Molimo prijavite se.");
+        return;
+      }
       try {
-        const response = await axios.get(`${BASE_URL}/api/requests`);
+        const response = await axios.get(`${BASE_URL}/api/requests`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setReservations(response.data);
       } catch (error) {
         console.error("Error fetching reservations:", error);
@@ -37,10 +55,23 @@ const RequestListPage: React.FC = () => {
   }, []);
 
   const handleApprove = async (reservationId: string) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Niste prijavljeni. Molimo prijavite se.");
+      return;
+    }
     try {
-      await axios.patch(`${BASE_URL}/api/reservations/${reservationId}`, {
-        approved: true,
-      });
+      await axios.patch(
+        `${BASE_URL}/api/reservations/${reservationId}`,
+        {
+          approved: true,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       setReservations((prevReservations) =>
         prevReservations.map((res) =>
           res._id === reservationId ? { ...res, approved: true } : res
@@ -61,8 +92,17 @@ const RequestListPage: React.FC = () => {
     if (!confirmCancel) {
       return;
     }
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Niste prijavljeni. Molimo prijavite se.");
+      return;
+    }
     try {
-      await axios.delete(`${BASE_URL}/api/reservations/${reservationId}`);
+      await axios.delete(`${BASE_URL}/api/reservations/${reservationId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setReservations((prevReservations) =>
         prevReservations.filter((res) => res._id !== reservationId)
       );
@@ -77,29 +117,45 @@ const RequestListPage: React.FC = () => {
     reservationId: string,
     vehicleId: string
   ) => {
-    if(reservationId!==""&& vehicleId!==""){
-    try {
-      const updatedVehicle = vehicles.find(
-        (vehicle) => vehicle._id === vehicleId
-      );
-      if (!updatedVehicle) {
-        throw new Error("Vozilo nije pronađeno.");
+    if (reservationId !== "" && vehicleId !== "") {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("Niste prijavljeni. Molimo prijavite se.");
+        return;
       }
-      await axios.patch(`${BASE_URL}/api/reservations/${reservationId}`, {
-        vehicle: vehicleId,
-      });
+      try {
+        const updatedVehicle = vehicles.find(
+          (vehicle) => vehicle._id === vehicleId
+        );
+        if (!updatedVehicle) {
+          throw new Error("Vozilo nije pronađeno.");
+        }
+        await axios.patch(
+          `${BASE_URL}/api/reservations/${reservationId}`,
+          {
+            vehicle: vehicleId,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-      setReservations((prevReservations) =>
-        prevReservations.map((res) =>
-          res._id === reservationId ? { ...res, vehicle: updatedVehicle } : res
-        )
-      );
+        setReservations((prevReservations) =>
+          prevReservations.map((res) =>
+            res._id === reservationId
+              ? { ...res, vehicle: updatedVehicle }
+              : res
+          )
+        );
 
-      alert("Vozilo uspješno dodijeljeno rezervaciji.");
-    } catch (error) {
-      console.error("Error approving reservation:", error);
-      alert("Došlo je do greške prilikom dodjeljivanja vozila rezervaciji.");
-    }}
+        alert("Vozilo uspješno dodijeljeno rezervaciji.");
+      } catch (error) {
+        console.error("Error approving reservation:", error);
+        alert("Došlo je do greške prilikom dodjeljivanja vozila rezervaciji.");
+      }
+    }
   };
 
   const unapprovedReservations = reservations.filter((res) => !res.approved);

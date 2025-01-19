@@ -34,7 +34,11 @@ const ReservationListPage: React.FC = () => {
       return;
     }
     try {
-      await axios.delete(`${BASE_URL}/api/reservations/${reservationId}`);
+      await axios.delete(`${BASE_URL}/api/reservations/${reservationId}`,{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       setReservations((prevReservations) =>
         prevReservations.filter((res) => res._id !== reservationId)
       );

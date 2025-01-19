@@ -18,7 +18,11 @@ const VehicleListPage: React.FC = () => {
   useEffect(() => {
     const fetchVehicles = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/api/vehicles`);
+        const response = await axios.get(`${BASE_URL}/api/vehicles`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
         setVehicles(response.data);
       } catch (error) {
         console.error("Error fetching vehicles:", error);
@@ -49,7 +53,11 @@ const VehicleListPage: React.FC = () => {
         technicalDate: new Date(editValues.technicalDate),
       };
 
-      await axios.patch(`${BASE_URL}/api/vehicle/${vehicleId}`, updatedValues);
+      await axios.patch(`${BASE_URL}/api/vehicle/${vehicleId}`, updatedValues, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       setVehicles((prevVehicles) =>
         prevVehicles.map((vehicle) =>
           vehicle._id === vehicleId
@@ -77,7 +85,11 @@ const VehicleListPage: React.FC = () => {
       return;
     }
     try {
-      await axios.delete(`${BASE_URL}/api/vehicle/${vehicleId}`);
+      await axios.delete(`${BASE_URL}/api/vehicle/${vehicleId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       setVehicles((prev) =>
         prev.filter((vehicle) => vehicle._id !== vehicleId)
       );
