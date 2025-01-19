@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
 import { useAuth } from "../Context";
 import axios from "axios";
@@ -7,7 +7,6 @@ import axios from "axios";
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const Header: React.FC = () => {
-  const navigate = useNavigate();
   const { currentUser } = useAuth();
 
   const handleLogout = () => {
