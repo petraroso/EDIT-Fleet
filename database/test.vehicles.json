@@ -1,0 +1,33 @@
+[{
+  "_id": {
+    "$oid": "678582020418fb6cd287c624"
+  },
+  "name": "Peugeot 2008",
+  "type": "Osobno vozilo",
+  "available": true,
+  "technicalDate": {
+    "$date": "2025-01-18T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "678582110418fb6cd287c625"
+  },
+  "name": "Citroen Berlingo",
+  "type": "Gospodarsko vozilo",
+  "available": true,
+  "technicalDate": {
+    "$date": "2025-02-06T00:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6785822a0418fb6cd287c626"
+  },
+  "name": "Citroen Berlingo",
+  "type": "Gospodarsko vozilo",
+  "available": false,
+  "technicalDate": {
+    "$date": "2025-09-04T00:00:00.000Z"
+  }
+}]

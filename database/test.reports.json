@@ -1,0 +1,39 @@
+[{
+  "_id": {
+    "$oid": "678582900418fb6cd287c627"
+  },
+  "title": "Problem s gumama",
+  "description": "Gospodarsko vozilo ima ispuhanu gumu. Gospodarsko vozilo ima ispuhanu gumu. Gospodarsko vozilo ima ispuhau gumu. Gospodarsko vozilo ima ispuhanu gumu. Gospodarsko vozilo ima ispuhanu gumu. Gospodarsko vozilo ima ispuhanu gumu.",
+  "solved": true
+},
+{
+  "_id": {
+    "$oid": "678583030418fb6cd287c629"
+  },
+  "title": "Problem s motorom",
+  "description": "Gospodarsko vozilo ima ispuhanu gumu. Gospodarsko vozilo ima ispuhanu gumu. Gospodarsko vozilo ima ispuhau gumu. Gospodarsko vozilo ima ispuhanu gumu. Gospodarsko vozilo ima ispuhanu gumu. Gospodarsko vozilo ima ispuhanu gumu.",
+  "solved": false
+},
+{
+  "_id": {
+    "$oid": "678583150418fb6cd287c62a"
+  },
+  "title": "Šteta od sudara",
+  "description": "Gospodarsko vozilo ima ispuhanu gumu. Gospodarsko vozilo ima ispuhanu gumu. Gospodarsko vozilo ima ispuhau gumu. Gospodarsko vozilo ima ispuhanu gumu. Gospodarsko vozilo ima ispuhanu gumu. Gospodarsko vozilo ima ispuhanu gumu.",
+  "solved": false
+},
+{
+  "_id": {
+    "$oid": "6786aa2a8c2c3a730daf0ad5"
+  },
+  "title": "Problem sa šasijom",
+  "description": "Problem je u tome sto je sve....",
+  "vehicle": {
+    "$oid": "678582110418fb6cd287c625"
+  },
+  "user": {
+    "$oid": "67857fe2d18d144792ec9bf1"
+  },
+  "__v": 0,
+  "solved": false
+}]

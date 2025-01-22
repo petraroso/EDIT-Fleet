@@ -1,0 +1,143 @@
+[{
+  "_id": {
+    "$oid": "678655301e9df6ecde73a6d2"
+  },
+  "startDate": {
+    "$date": "2025-01-17T00:00:00.000Z"
+  },
+  "endDate": {
+    "$date": "2025-02-09T00:00:00.000Z"
+  },
+  "purpose": "Poslovni put van Hrvatske",
+  "approved": false,
+  "vehicle": {
+    "$oid": "678582110418fb6cd287c625"
+  },
+  "user": {
+    "$oid": "67857fe2d18d144792ec9bf1"
+  },
+  "__v": 0,
+  "vehicleType": "Gospodarsko vozilo"
+},
+{
+  "_id": {
+    "$oid": "678655afcb0aafb3cc65207c"
+  },
+  "startDate": {
+    "$date": "2025-01-17T00:00:00.000Z"
+  },
+  "endDate": {
+    "$date": "2025-02-09T00:00:00.000Z"
+  },
+  "purpose": "Put na Plitvička jezera",
+  "approved": false,
+  "vehicle": null,
+  "user": {
+    "$oid": "67857fe2d18d144792ec9bf1"
+  },
+  "vehicleType": "Gospodarsko vozilo"
+},
+{
+  "_id": {
+    "$oid": "67865676cb0aafb3cc65207d"
+  },
+  "startDate": {
+    "$date": "2025-01-27T00:00:00.000Z"
+  },
+  "endDate": {
+    "$date": "2025-08-09T00:00:00.000Z"
+  },
+  "purpose": "Ekskurzija",
+  "approved": true,
+  "vehicle": {
+    "$oid": "678582110418fb6cd287c625"
+  },
+  "user": {
+    "$oid": "67857fe2d18d144792ec9bf1"
+  },
+  "vehicleType": "Osobno vozilo"
+},
+{
+  "_id": {
+    "$oid": "67865db01e9df6ecde73a735"
+  },
+  "startDate": {
+    "$date": "2025-01-08T00:00:00.000Z"
+  },
+  "endDate": {
+    "$date": "2025-02-08T00:00:00.000Z"
+  },
+  "purpose": "Putovanje u Istru",
+  "approved": false,
+  "vehicle": {
+    "$oid": "678582020418fb6cd287c624"
+  },
+  "user": {
+    "$oid": "67857fe2d18d144792ec9bf1"
+  },
+  "__v": 0,
+  "vehicleType": "Osobno vozilo"
+},
+{
+  "_id": {
+    "$oid": "6786614ce38443b508144f61"
+  },
+  "startDate": {
+    "$date": "2025-04-18T00:00:00.000Z"
+  },
+  "endDate": {
+    "$date": "2025-08-14T00:00:00.000Z"
+  },
+  "purpose": "Poslovno",
+  "approved": false,
+  "vehicle": {
+    "$oid": "678582020418fb6cd287c624"
+  },
+  "user": {
+    "$oid": "67857fe2d18d144792ec9bf1"
+  },
+  "__v": 0,
+  "vehicleType": "Osobno vozilo"
+},
+{
+  "_id": {
+    "$oid": "67866206e38443b508144f71"
+  },
+  "startDate": {
+    "$date": "2025-01-15T00:00:00.000Z"
+  },
+  "endDate": {
+    "$date": "2025-01-18T00:00:00.000Z"
+  },
+  "purpose": "Izletnička grupa",
+  "approved": false,
+  "vehicle": {
+    "$oid": "678581f80418fb6cd287c623"
+  },
+  "user": {
+    "$oid": "67857fe2d18d144792ec9bf1"
+  },
+  "__v": 0,
+  "vehicleType": "Gospodarsko vozilo"
+},
+{
+  "_id": {
+    "$oid": "67866244f00e571004b537e9"
+  },
+  "startDate": {
+    "$date": "2025-01-11T00:00:00.000Z"
+  },
+  "endDate": {
+    "$date": "2025-02-02T00:00:00.000Z"
+  },
+  "purpose": "Putovanje u BiH",
+  "approved": false,
+  "vehicle": {
+    "$oid": "678581f80418fb6cd287c623"
+  },
+  "user": {
+    "$oid": "67857fe2d18d144792ec9bf1"
+  },
+  "__v": 0,
+  "vehicleType": "Osobno vozilo"
+}]

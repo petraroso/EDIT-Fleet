@@ -1,0 +1,61 @@
+[{
+  "_id": {
+    "$oid": "67857f24d18d144792ec9bf0"
+  },
+  "username": "Ivana Brlić Mažuranić",
+  "email": "ivana@email.com",
+  "password": "$2b$10$a0EtyW./l/ChDXWpBO4Z.ucxpZwl1K4qhMWVVNsL0HqmdTMtA6j3u",
+  "role": "User",
+  "reservations": []
+},
+{
+  "_id": {
+    "$oid": "67857fe2d18d144792ec9bf1"
+  },
+  "username": "Mato Lovrak",
+  "email": "mato@email.com",
+  "password": "$2b$10$a0EtyW./l/ChDXWpBO4Z.ucxpZwl1K4qhMWVVNsL0HqmdTMtA6j3u",
+  "role": "User",
+  "reservations": []
+},
+{
+  "_id": {
+    "$oid": "67858028d18d144792ec9bf2"
+  },
+  "username": "Miroslav Krleža",
+  "email": "mmiroslav@email.com",
+  "password": "$2b$10$a0EtyW./l/ChDXWpBO4Z.ucxpZwl1K4qhMWVVNsL0HqmdTMtA6j3u",
+  "role": "User",
+  "reservations": []
+},
+{
+  "_id": {
+    "$oid": "67858050d18d144792ec9bf3"
+  },
+  "username": "Vladimir Nazor",
+  "email": "nazor@email.com",
+  "password": "$2b$10$a0EtyW./l/ChDXWpBO4Z.ucxpZwl1K4qhMWVVNsL0HqmdTMtA6j3u",
+  "role": "User",
+  "reservations": []
+},
+{
+  "_id": {
+    "$oid": "67858079d18d144792ec9bf4"
+  },
+  "username": "Admin1",
+  "email": "admin@email.com",
+  "password": "$2b$10$a0EtyW./l/ChDXWpBO4Z.ucxpZwl1K4qhMWVVNsL0HqmdTMtA6j3u",
+  "role": "Admin",
+  "reservations": []
+},
+{
+  "_id": {
+    "$oid": "678d7d724a7687af42620444"
+  },
+  "username": "Admin",
+  "email": "Admin@email.com",
+  "password": "$2b$10$P1U8ivEuVGBBXmKtK/L62uBKzW4WozOYEZmSdEj.CNh64CXxFWUVe",
+  "role": "Admin",
+  "reservations": [],
+  "__v": 0
+}]
